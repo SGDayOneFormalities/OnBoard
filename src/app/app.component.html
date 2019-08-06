@@ -1,0 +1,35 @@
+<ion-app>
+<!--   <ion-split-pane> -->
+    <ion-menu side="start" swipeGesture="true">      
+      <ion-content class="menu-content" no-padding>        
+        <ion-list no-margin no-padding>
+          <ion-menu-toggle auto-hide="false" color="light">
+            <div text-center class="user-block">
+              <div padding><img class="default-user-icon" src="assets/default-user.jpg" width="100"/></div>
+              <div> <ion-text color="light" class="fs-12 proximanova-light" >WELCOME</ion-text></div>
+              <div padding-vertical>
+                <ion-text color="light" class="proximanova-light" slot="start" text-left class="">{{usename | titlecase}}</ion-text>
+               <!--  <ion-button ion-button  color="secondary" slot="end" class="ion-padding-horizontal" (click)="logOut()"> </ion-button>  *ngIf="!(isHr && p.icon=='gift')" -->
+            </div>
+            </div>
+            <div *ngFor="let p of appPages" >
+              <div  text-center [routerDirection]="'root'" [routerLink]="[p.url]" id="menuItem" [class.activeItem]="isActive(p)" class="sidemenu-item" (click)="menuItemClick($event, p)">
+                <p><ion-icon slot="start" [name]="p.icon" color="light" class="leftsidemenu-icon"></ion-icon></p>
+                <p>
+                  <ion-text color="light">{{p.title}}</ion-text>
+                </p>
+              </div>              
+            </div>
+            <div text-center class="sidemenu-item" (click)="logOut()">
+                <p><ion-icon slot="start" name="log-out" color="light" class="leftsidemenu-icon"></ion-icon></p>
+                <p>
+                  <ion-text color="light">Signout</ion-text>
+                </p>
+            </div>
+          </ion-menu-toggle>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+  <ion-router-outlet main></ion-router-outlet>
+<!--   </ion-split-pane> -->
+</ion-app>

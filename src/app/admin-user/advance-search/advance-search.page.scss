@@ -1,0 +1,20 @@
+/*.cdk-overlay-pane {
+    max-width: 70% !important;
+    max-height: 100%;
+    width: 70% !important;
+}
+
+#cdk-overlay-1 {
+    width: 70% !important;
+}
+.cdk-overlay-pane{
+      max-width: 50%!important;
+      width: 50%!important;
+  }*/
+  
+  .cdk-overlay-container .mat-dialog-container, 
+  ::ng-deep .mat-dialog-container {
+  	width:500px!important;
+  	left:50%;
+  	margin: 0 auto;
+  }

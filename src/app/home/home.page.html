@@ -1,0 +1,257 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start" text-left  class="sg-logo">
+          <img src="/assets/SG-Logo.png" float-left />
+      </ion-buttons>
+      <ion-title text-right class="username-details">
+      <div *ngIf="viewUser">
+        <div float-right >
+             <img class="default-user-icon" src="assets/default-user.jpg" width="50"/>
+          </div>
+        <div float-right *ngIf="viewUser">
+          <div class="user-name">Welcome, {{fName}}</div>
+          <div class="user-destination">{{designation}}</div>
+         </div>  
+      </div>      
+      </ion-title>
+      <ion-buttons slot="end" float-right (click)="homePage()" *ngIf="isHrFlag">
+        <ion-icon name="home" color="dark" padding-horizontal class="admin-home-icon"></ion-icon>
+      </ion-buttons>
+      <ion-buttons slot="end" float-right>
+          <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <div class="my-container">
+      <ngx-loading [show]="loading"></ngx-loading>
+  </div>
+  <ion-content no-padding>
+    <ion-card-header color="primary" text-uppercase>
+      <div class="container">Personal Details</div>
+    </ion-card-header>
+    <ion-grid class="container" no-padding>
+      <ion-row >
+        <ion-col>
+          <div class="sg-form">
+            <ion-item lines="none">
+              <ion-label position="fixed" text-wrap>Full Name <span class="mandatory-asterisk">*</span></ion-label>
+              <!-- <ion-input disabled="{{isReadonly}}" #firstname minlength="1" maxlength="25"  name="fName" id="fName" [(ngModel)]="fName" letterOnly="true" requied placeholder="Firstname" clearInput></ion-input>
+              <ion-input disabled="{{isReadonly}}" minlength="0" maxlength="25"  name="mName" id="mName"  [(ngModel)]="mName" letterOnly="true" placeholder="Middlename" clearInput></ion-input>
+              <ion-input disabled="{{isReadonly}}" minlength="1" maxlength="25" name="lName" id="lName"  [(ngModel)]="lName" letterOnly="true" requied placeholder="Lastname" clearInput></ion-input>     -->  
+              <mat-form-field class="ion-margin-end">
+                <input matInput required disabled="{{isReadonly}}" #firstname minlength="1" maxlength="25"  name="fName" id="fName" [(ngModel)]="fName" letterOnly="true" requied placeholder="Firstname" clearInput>
+              </mat-form-field>
+              <mat-form-field class="ion-margin-end">
+                <input matInput disabled="{{isReadonly}}" minlength="0" maxlength="25"  name="mName" id="mName"  [(ngModel)]="mName" letterOnly="true" placeholder="Middlename" clearInput>
+              </mat-form-field>
+              <mat-form-field class="ion-margin-end">
+                <input matInput required disabled="{{isReadonly}}" minlength="1" maxlength="25" name="lName" id="lName"  [(ngModel)]="lName" letterOnly="true" requied placeholder="Lastname" clearInput>
+              </mat-form-field>                 
+            </ion-item>
+            <ion-item lines="none" no-padding no-margin style="height:15px;">
+              <ion-label position="fixed" text-wrap no-padding no-margin> </ion-label>
+              <div style="font-size: 12px; margin-top:-35px;margin-left: 12px;color: #ff0000;">
+                  <strong>NOTE:</strong>  Name should be as per Passport (In case passport not available as per PAN).              
+              </div>
+            </ion-item>  
+              <ion-row lines="none">
+                   
+                      <!-- <div  text-center margin ng2FileDrop
+                            [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}"
+                            (fileOver)="fileOverAnother($event)"
+                            [uploader]="uploader"
+                            class="well my-drop-zone" padding>
+                          <div><ion-icon style="font-size: 60px; color:#b9b9b9" name="ios-cloud-upload"></ion-icon></div>
+                          <strong>Choose a File</strong>  (or) Drag and Drop
+                          
+                      </div> -->
+                        <!-- <div  text-center margin ng2FileDrop>
+                          <input class="document-upload" type="file" ng2FileSelect [uploader]="uploader" multiple />
+                        </div>  -->
+                    <ion-col size="12" *ngIf="!(filename.length >= 1) && (!isIpad)" >
+                      <!-- <div  *ngIf="!(uploader?.queue?.length == 1)" float-right > -->
+                      <ion-item lines="none" no-padding no-margin style="height: 17px;">
+                        <ion-label position="fixed" text-wrap no-padding no-margin> </ion-label>
+                        <div class="upload-employee-data" float-left ng2FileDrop > 
+                            Upload Document
+                            <input type="file" ng2FileSelect [uploader]="uploader" (click)="uploadClick()"/>
+                          </div>  
+                          <div float-right ion-margin-horizontal style="margin-top: -27px;">
+                              <small>Only PDF is allowed. Maximum file size can be 1 MB.</small>
+                          </div>
+                      </ion-item>  
+                        
+                      <!-- </div> -->
+                    </ion-col>
+                    <ion-col size="12" *ngIf="(uploader?.queue?.length) || (filename.length>0)" >
+                      <div *ngFor="let file of filename" float-left class="ion-margin-horizontal" style="margin-top: -12px;"> 
+                          <div class="view-user-details">
+                              <ion-icon name="close-circle" class="view-user-close"  (click)="removeFile(file)"></ion-icon>
+                              <div  (click)="viewImg(file)">
+                                <div class="view">View</div>
+                                <!--<img class="view-user-thumb" src="http://10.2.108.65:8080/static02/{{id}}/{{file}}" />-->
+                                 <img class="view-user-thumb" src="/assets/pdf.png" />
+                              </div>
+                           </div>  
+                           <div>
+                             <small>{{file}}</small>
+                         </div> 
+                      </div>     
+                      <!-- <div *ngFor="let item of uploader.queue" float-left class="ion-margin-horizontal"> 
+                        <div  *ngIf="!item.isUploaded || (!fileResponse)">
+                          <div class="view-user-details">
+                              <ion-icon name="close-circle" class="view-user-close" (click)="removeFileitem(item)"></ion-icon>
+                             <div class="view">View</div>                           
+                             <img class="view-user-thumb" src="filePath"/>
+                           </div>  
+                           <div>
+                             <small>{{ item?.file?.name }}</small>
+                          </div> 
+                      </div>   -->
+                      <!-- </div>                -->
+                    </ion-col>         
+                          
+                <!-- <ion-col size="12" padding-start *ngIf="(uploader?.queue?.length) || (filename.length>0)">    
+                    <table class="adminuser-table"  text-left>
+                        <thead>
+                            <tr>
+                                <th width="50%">Name</th>
+                                <th>Size</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let file of filename">
+                              <td >
+                                  {{file}}
+                              </td>
+                              <td></td>
+                              <td>
+                                <div class="progress" style="font-size: 24px;">  
+                                  <ion-icon ios="ios-checkmark-circle" md="md-checkmark-circle" class="status-color" color="success"></ion-icon>
+                                </div>
+                              </td>                            
+                              <td>
+                                  <button ion-button icon-only clear (click)="removeFile(file)" style="background-color: #fff;">
+                                    <ion-icon name="trash" color="medium" class="admin-menu-icons"></ion-icon>
+                                  </button>
+                              </td>
+                            </tr>
+                            <tr *ngFor="let item of uploader.queue">
+                                <td><strong>{{ item?.file?.name }}</strong></td>
+                                <td nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
+                                <td>
+                                  <div class="progress" style="font-size: 24px;">   
+                                      <div *ngIf="item.isUploaded">
+                                          <ion-icon ios="ios-checkmark-circle" md="md-checkmark-circle" class="status-color" color="success"></ion-icon>
+                                      </div>
+                                      <div *ngIf="!item.isUploaded">
+                                        <ion-icon ios="ios-close-circle" md="md-close-circle" class="status-color" color="warning"></ion-icon>
+                                      </div>
+                                  </div>
+                                </td>
+                                <td>
+                                    <button ion-button icon-only clear (click)="removeFileitem(item)" style="background-color: #fff;">
+                                      <ion-icon name="trash" color="medium" class="admin-menu-icons"></ion-icon>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </ion-col>    -->
+              </ion-row>    
+            <ion-item lines="none">
+              <ion-label  text-wrap  position="fixed">Standard format of writing the name</ion-label>
+              <ion-input  disabled="{{isReadonly}}" maxlength="100" name="stdNameFormat" id="stdNameFormat" [(ngModel)]="stdNameFormat" placeholder="Standard format of writing the name" 
+              (blur)="standAlert()" clearInput></ion-input>
+            </ion-item>
+  
+            <ion-item lines="none">
+              <ion-label text-wrap position="fixed">Have you ever changed your name</ion-label>
+              <ion-toggle disabled="{{isReadonly}}" (ionChange)="(isDisabled = !isDisabled) && (nameChangeDate = null)" [(ngModel)]="nameChanged"></ion-toggle>
+            </ion-item>
+            <ion-item lines="none" *ngIf="(nameChanged === true) || (isDisabled)">
+              <ion-label text-wrap position="fixed">If Yes, Name Change Date</ion-label>
+              <mat-form-field>
+                <input disabled="{{isReadonly}}" matInput [matDatepicker]="pickerNameChangeDate"  (focus)="pickerNameChangeDate.open()" [max]='maxDate' name="nameChangeDate"
+                (blur)="focusDateChng=false" id="nameChangeDate" [(ngModel)]="nameChangeDate" clearInput >
+                <!-- <button mat-button [style.visibility]="focusDateChng ? 'visible' : 'hidden'" matSuffix mat-icon-button aria-label="Clear" (click)="clearDateChng()" class="transparent-btn">X</button> -->
+                <mat-datepicker-toggle disabled="{{isReadonly}}" matSuffix [for]="pickerNameChangeDate"></mat-datepicker-toggle>
+                <mat-datepicker disabled="{{isReadonly}}" #pickerNameChangeDate></mat-datepicker>
+              </mat-form-field>
+            </ion-item>
+  
+            <ion-item lines="none">
+              <ion-label position="fixed" text-wrap>PAN Number<span class="mandatory-asterisk">*</span></ion-label>     
+              <ion-input  disabled="{{isReadonly}}" maxlength="10"  name="PAN" id="PAN" [(ngModel)]="PAN" placeholder="PAN" 
+               clearInput></ion-input>
+            </ion-item>   
+            
+            <ion-item lines="none">
+              <ion-label position="fixed" text-wrap>Date of Birth<span class="mandatory-asterisk">*</span></ion-label>     
+              <mat-form-field>
+                <input disabled="{{isReadonly}}" matInput [matDatepicker]="pickerDOB" [(ngModel)]='DOB' [max]='maxDate' (focus)="openDOBpicker($event, pickerDOB)" #elementDOBToFocus>
+                <!-- <button #btn aria-label="Clear" [style.visibility]="focusBtn ? 'visible' : 'hidden'" matSuffix mat-icon-button (click)="clearDOBpicker($event, pickerDOB)" ></button> -->
+                <mat-datepicker-toggle matSuffix [for]="pickerDOB" disabled="{{isReadonly}}"></mat-datepicker-toggle>
+                <mat-datepicker #pickerDOB disabled="{{isReadonly}}"></mat-datepicker>
+              </mat-form-field>
+            </ion-item>          
+            <ion-item lines="none">                     
+              <ion-label  position="fixed">Gender</ion-label>
+              <ion-radio-group class="gender"  [(ngModel)]="sex" disabled="{{isReadonly}}">              
+                <ion-item lines="none" style="font-size: 14px;" float-left>
+                  <ion-label>Male</ion-label>
+                  <ion-radio disabled="{{isReadonly}}" slot="start" value="male" ></ion-radio>
+                </ion-item>    
+                <ion-item lines="none" style="font-size: 14px;"  float-left>
+                  <ion-label>Female</ion-label>
+                  <ion-radio disabled="{{isReadonly}}" slot="start" value="female" ></ion-radio>
+                </ion-item>    
+              </ion-radio-group>
+            </ion-item>           
+            <ion-item lines="none">
+              <ion-label position="fixed" text-wrap>Marital Status</ion-label>
+              <mat-form-field>
+                <mat-select [(ngModel)]="maritalStatus" required disabled="{{isReadonly}}">                
+                  <mat-option>None</mat-option>
+                  <mat-option value="single">Single</mat-option>
+                  <mat-option value="married">Married</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </ion-item>
+            <ion-item lines="none">
+              <ion-label position="fixed" text-wrap>Father Name</ion-label>
+              <!-- <ion-input disabled="{{isReadonly}}" maxlength="80" name="fFName" id="fFName" [(ngModel)]="fFName" placeholder="Firstname"  letterOnly="true" clearInput></ion-input>            
+              <ion-input disabled="{{isReadonly}}" maxlength="80" name="fMName" id="fMName" [(ngModel)]="fMName" letterOnly="true" placeholder="Middlename" clearInput></ion-input>
+              <ion-input disabled="{{isReadonly}}" maxlength="80" name="fLName" id="fLName" [(ngModel)]="fLName" letterOnly="true" placeholder="Lastname" clearInput></ion-input> -->
+              <mat-form-field class="ion-margin-end">
+                <input matInput  disabled="{{isReadonly}}" maxlength="80" name="fFName" id="fFName" [(ngModel)]="fFName" placeholder="Firstname"  letterOnly="true" clearInput>
+              </mat-form-field>
+              <mat-form-field class="ion-margin-end">
+                <input matInput disabled="{{isReadonly}}" maxlength="80" name="fMName" id="fMName" [(ngModel)]="fMName" letterOnly="true" placeholder="Middlename" clearInput>
+              </mat-form-field>
+              <mat-form-field class="ion-margin-end">
+                <input matInput disabled="{{isReadonly}}" maxlength="80" name="fLName" id="fLName" [(ngModel)]="fLName" letterOnly="true" placeholder="Lastname" clearInput>
+              </mat-form-field>
+            </ion-item>
+            <ion-row margin-top>
+              <ion-col>
+                <ion-button ion-button  shape="round" color="secondary" float-left (click)="backWelcome()"> 
+                  <span class="inner-prebtn-icon"><ion-icon name="arrow-back"></ion-icon> </span> Back
+                </ion-button>
+                <ion-button ion-button  shape="round" color="secondary" float-left (click)="editPage()" *ngIf="isReadonly"> <span class="inner-prebtn-icon"><ion-icon name="ios-create"></ion-icon> </span> Edit
+                </ion-button>
+              </ion-col>
+              <ion-col>                   
+                <ion-button ion-button shape="round" color="secondary" float-right (click)="nextContact(fName, mName, lName, stdNameFormat, nameChanged, nameChangeDate, PAN, DOB, sex, maritalStatus, fFName, fMName, fLName)">Next 
+                  <span class="inner-nextbtn-icon"><ion-icon name="arrow-forward"></ion-icon> </span>
+                </ion-button>
+              </ion-col>
+            </ion-row>   
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
+  

@@ -1,0 +1,116 @@
+<ion-header>
+  <ion-toolbar  class="header">
+    <ion-buttons slot="start" text-left  class="sg-logo" float-left>
+        <img src="/assets/SG-Logo.png" float-left />
+    </ion-buttons>
+    <ion-buttons slot="end" float-right (click)="homePage()" *ngIf="isHrFlag">
+      <ion-icon name="home" color="dark" padding-horizontal class="admin-home-icon"></ion-icon>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button>
+    <ion-menu-button></ion-menu-button>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<div class="my-container">
+    <ngx-loading [show]="loading"></ngx-loading>
+</div>
+<ion-content no-padding>
+  <ion-card-header color="primary" text-uppercase>
+    <div class="container">Confirmation Detail</div>
+  </ion-card-header>
+  <ion-grid class="container" no-padding>
+    <ion-row >
+      <ion-col>
+        <div class="sg-form" padding>
+          <ion-item lines="none" no-padding>How did you get to know about this opportunity at Scientific games India Private Limited? In case an employee of scientific games referred you then please mention the name and employee code.</ion-item>
+          <ion-item lines="none" no-padding> 
+            <ion-label  position="fixed"  text-wrap>Referral Employee Name</ion-label>
+            <ion-input  letterOnly="true" maxlength="80" [(ngModel)]="referralName" disabled="{{isReadonly}}" clearInput></ion-input>
+          </ion-item>      
+          <ion-item lines="none" no-padding>
+            <ion-label  position="fixed" text-wrap>Referral Employee Code </ion-label>
+            <ion-input  [(ngModel)]="referralCode" maxlength="50" disabled="{{isReadonly}}" OnlyNumber="true" clearInput></ion-input>
+          </ion-item>
+          <ion-item lines="none" no-padding margin-top margin-bottom>
+          <h6 style="background: #ccc; width: 100%; padding:10px;">INFORMATION RELEASE FORM</h6>
+          </ion-item>
+          <p no-margin>
+            <ion-text class="confirmation-details">
+              I, <span class="confirm-username" [ngStyle]="{'opacity': isReadonly ? '0.6' : '1' }">{{canditateName }}</span><span>hereby authorize Scientific Games  India Private Limited and/or any of its subsidiaries or partners or vendors and any person or organizations acting on its behalf, to verify information presented in my employment application and to compile a background report for that purpose. I hereby grant authority to the bearer of this letter to access or be provided with full details of my previous employment record held by any company or business for which I previously worked. This information should include, but not be restricted to, the dates of employment, position held, and details of my salary upon departure and an appraisal of my performance, capabilities and character. I hereby release form liability any person or entity requesting or supplying such information.</span>
+            </ion-text>
+          </p>
+          <ion-row>
+            <ion-col size="4">
+              <ion-item lines="none">
+                <ion-label position="floating" text-wrap>Date </ion-label>
+                <mat-form-field>
+                  <input matInput [matDatepicker]="pickersubmitDate" [(ngModel)]='submitDate' [max]='maxDate' disabled="{{isReadonly}}"  (focus)="pickersubmitDate.open()" (blur)="focus=false" (focus)="focus=true">
+                  <!-- <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="submitDate=''" class="transparent-btn" *ngIf="focus===true">X</button>  -->
+                  <mat-datepicker-toggle matSuffix [for]="pickersubmitDate" disabled="{{isReadonly}}"></mat-datepicker-toggle>
+                  <mat-datepicker #pickersubmitDate disabled="{{isReadonly}}"></mat-datepicker>
+                </mat-form-field>
+              </ion-item>
+              <ion-item lines="none">
+                <ion-label position="floating" text-wrap>Location </ion-label>
+                <ion-input maxlength="50" [(ngModel)]="submitLocation" disabled="{{isReadonly}}" clearInput></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="4" offset="4">
+              <ion-item lines="none">
+                <ion-label  position="floating" text-wrap>Name </ion-label>
+                <ion-input  maxlength="80" letterOnly="true" [(ngModel)]="canditateName" disabled="{{isReadonly}}" clearInput></ion-input>
+              </ion-item>
+              <ion-item lines="none">
+                <ion-label  position="floating" text-wrap>Employee Code </ion-label>
+                <ion-input  maxlength="50" [(ngModel)]="canditateEmpCode" disabled="{{isReadonly}}" OnlyNumber="true" clearInput></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="isHrFlag" margin-top>
+            <ion-col>
+              <ion-item lines="none">
+                <ion-label  position="floating" text-wrap>Comment </ion-label>
+                <ion-textarea style="border-bottom: #bbb solid 1px;" #resendText placeholder="Resend email comment" [(ngModel)]="resendComment" disabled="{{isReadonly}}" clearInput autocorrect="on"></ion-textarea>
+              </ion-item>
+              <!-- <mat-form-field>
+                <textarea matInput ></textarea>
+              </mat-form-field> -->
+            </ion-col>
+          </ion-row>
+        
+          <ion-row margin-top>
+            <ion-col> 
+              <ion-button ion-button  shape="round" color="secondary" float-left (click)="backExperience()">
+                <span class="inner-prebtn-icon"><ion-icon name="arrow-back"></ion-icon> </span>
+              Back
+              </ion-button> 
+              <ion-button ion-button  shape="round" color="secondary" float-left (click)="editPage()" *ngIf="isReadonly"> 
+              <span class="inner-prebtn-icon"><ion-icon name="ios-create"></ion-icon> </span> 
+              Edit</ion-button>                 
+              <!-- <ion-button ion-button  shape="round" color="secondary" float-left (click)="homePage()" *ngIf="isHrFlag"> 
+                  <span class="inner-prebtn-icon"><ion-icon name="md-home"></ion-icon> </span> 
+                  Home
+                </ion-button>      -->
+            </ion-col>
+            <ion-col>                  
+              <ion-button ion-button shape="round" color="secondary" float-right (click)="submitData()" *ngIf="!isHrFlag">Submit
+                  <span class="inner-nextbtn-icon"><ion-icon name="done-all"></ion-icon></span>
+              </ion-button>               
+              <ion-button ion-button shape="round" color="secondary" float-right (click)="saveData()" *ngIf="!isHrFlag">Save
+                <span class="inner-nextbtn-icon"><ion-icon name="done-all"></ion-icon></span>
+              </ion-button>
+              <ion-button ion-button shape="round" color="secondary" float-right (click)="saveData()" *ngIf="isHrFlag" >Complete Review
+                <span class="inner-nextbtn-icon"><ion-icon name="done-all"></ion-icon></span>
+              </ion-button>
+              <ion-button ion-button shape="round" color="secondary" float-right (click)="resendMailToCandidate()" *ngIf="isHrFlag" [disabled]="(resendComment == '') || (resendComment == null)">Resend Email
+                <span class="inner-nextbtn-icon"><ion-icon name="done-all"></ion-icon></span>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

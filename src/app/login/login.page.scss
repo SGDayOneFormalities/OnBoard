@@ -1,0 +1,172 @@
+
+.login-content {
+	--ion-background-color:transparent;
+ 	background:url('../../assets/employee-onboarding-banner.jpg') top center no-repeat fixed;
+ 	background-size:cover;
+	width:100%;
+	height:100%;
+	position:relative;
+	&:before{
+		position:absolute;
+		background: rgba(0, 0, 0, 0.5);
+		top:0;bottom:0;right:0;left:0;
+		content:"";
+	}     
+	.login-form{
+		width:450px;
+		margin:200px auto 0 auto;
+		background: rgba(255,255,255,0.74);
+		border-radius:10px;
+		box-shadow: 0 0 15px #101010, 10px 10px 8px rgba(2, 2, 2, 0.5);
+		.login-title{
+			background: #0065a3;
+			background: -moz-linear-gradient(top, #0065a3 0%, #003352 100%);
+			background: -webkit-linear-gradient(top, #0065a3 0%,#003352 100%);
+			background: linear-gradient(to bottom, #0065a3 0%,#003352 100%);
+			color:#fff;
+			font-size:20pt;
+			margin-right:-25px;
+			margin-left:-25px;
+			margin-bottom:25px;
+			position:relative;
+			padding: 15px 0 10px 0;
+		}
+		.arrow{
+		    width: 0;
+		    height: 0;
+		    position: absolute;
+		    &.arrow-topleft{
+		    	border-top: 13px solid transparent;
+			    border-right: 10px solid #fff;
+			    border-bottom: 0px solid transparent;
+			    left: 0px;
+			    top: -13px;
+		    }
+		    &.arrow-bottomleft{
+			    border-top: 0px solid transparent;
+			    border-bottom: 13px solid transparent;
+			    border-right: 9px solid #fff;
+		    	left: 0px;
+			    bottom: -13px;
+		    }
+		    &.arrow-topright{
+		    	border-top: 11px solid transparent;
+			    border-left: 9px solid #fff;
+			    border-bottom: 0px solid transparent;
+			    right: 0px;
+			    top: -11px;			   
+		    }
+		    &.arrow-bottomright{
+		    	border-top: 9px solid transparent;
+				border-left: 11px solid #fff;
+				border-bottom: 0px solid transparent;
+			    right: 0px;
+			    bottom: -10px;
+			    transform: rotate(90deg);
+			    -webkit-transform: rotate(90deg);
+			    -ms-transform: rotate(90deg);
+		    }		    
+		}				
+	}
+	ion-toggle{
+	   --background:#c5c5c5;
+	   --handle-background:#0d6289;
+	}
+	
+	.logo{
+		width:158pt;
+		margin-top: -100pt;
+	}
+	ion-button{
+		--border-radius:5px;		
+	}
+    ion-item {
+         margin-bottom: 15pt;
+		 background: rgba(0,0,0,0.74);
+		 --background-activated: rgba(0,0,0,0.74);
+   		 --background-focused: rgba(0,0,0,0.74);
+		 border: none!important;
+		 padding:0;
+		 box-shadow: none!important;
+		 border-radius: 5px;
+		 
+		 ion-input{
+			border-top-left-radius: 5pt;
+			border-bottom-left-radius: 5pt;
+			--padding-top: 14px;
+    		--padding-bottom: 14px;
+    		color: #fff;
+    		letter-spacing:0.6px;
+			
+		}
+		ion-label{
+			padding: 8pt 9pt 6pt 13pt;
+			border-top-right-radius: 5pt;
+			border-bottom-right-radius: 5pt;
+			color: #fff !important;
+			font-size: 20pt;
+			height: 36pt;
+			&.sc-ion-label-md-s{
+				height:35pt;
+			}
+		}
+    } 
+    .login-btn{
+    	border-radius:5px;
+    }  
+	
+	.rememberme{
+		ion-label{
+			letter-spacing: 0.7pt;
+			margin-top:6pt!important;
+			margin-left: 10px;			
+		}		
+		ion-toggle{
+		    margin-bottom: 8px;
+		}
+	}
+  }
+
+@media (min-width:1200px){
+
+  ion-content{
+    --background:transparent;
+  }
+  ion-grid.container{
+     min-height:700px;
+     --ion-background-color:transparent;
+  }
+}
+@media only screen and (min-width: 1336px) {
+	.login-content {
+		.login-form{
+			margin:120px auto 0 auto;
+		}
+	}
+}
+@media(max-width: 450px) {
+	.login-form{
+		width:90%!important;
+		margin:120px auto 0 auto!important;
+	}
+}
+
+/*IE 11 Browser Support Start*/
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) { 
+	body .login-content .inner-scroll{
+		--background:transparent!important;
+		--background-color:transparent!important;
+		background:transparent!important;
+	}
+	body .inner-scroll.sc-ion-content-20{
+		--background:transparent!important;
+		background:transparent!important;
+	}
+	body .login-content ion-item ion-input{
+		--padding-top: 0px;
+    	--padding-bottom: 0px;
+		padding-top: 0px;
+    	padding-bottom: 0px;
+	}
+}
+/*IE 11 Browser Support End*/

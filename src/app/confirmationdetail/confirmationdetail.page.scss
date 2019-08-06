@@ -1,0 +1,146 @@
+.confirm-username{
+    border-bottom: 1px solid #ccc;
+    width: 420px;
+    display: inline-block;
+    padding-left: 5px;
+}
+.confirmation-details{
+	line-height:27px;
+}
+.thankyouToast { 
+    width: 300px;
+    height: 200px;
+    text-align:center;
+    size: 22px;
+}
+.alert-wrapper.sc-ion-alert-md {
+    .alert-button-group sc-ion-alert-md{
+        justify-content: center !important;
+    }
+    .alert-message sc-ion-alert-md{
+        text-align: center !important;
+    }
+    .alert-head sc-ion-alert-md {
+        text-align: center !important;
+    }
+}
+/*.slantedBackground {
+    width: 100%;
+    height: 900px;
+    overflow: hidden;
+    -webkit-transform-origin: 0;
+    transform-origin: 0;
+    background-size: 150% 150%;
+    background-image: linear-gradient(-20deg, #ec008c  0%, #fc6767 100%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    -ms-transform: skewY(-16deg);
+    -webkit-transform: skewY(-16deg);
+    transform: skewY(-16deg);
+    animation-name: slantedBackground;
+    animation-iteration-count: infinite;
+    animation-duration: 5s;
+}
+
+.slantedBackground span {
+	position: absolute;
+    height: 30px !important;
+    width: 40%;
+    min-width: 400px;
+    right: 0;
+    left: auto !important;
+    opacity: 0.05;
+    background: #fff !important;
+    animation-name: slider1;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in;
+    top: auto !important;
+    margin-bottom: 100px;
+}
+.slantedBackground span:first-child {
+    width: 80%;
+    animation-duration: 6s;
+    bottom: 120px;
+}
+.slantedBackground span:nth-child(2){
+    width: 40%;
+    animation-duration: 4.3s;
+    bottom: 120px;
+}
+.slantedBackground span:nth-child(3){
+    width: 50%;
+    animation-duration: 9.2s;
+    bottom: 150px;
+}
+.slantedBackground span:nth-child(4){
+    width: 30%;
+    animation-duration: 8.4s;
+    bottom: 150px;
+}
+.slantedBackground span:nth-child(5){
+    width: 70%;
+    animation-duration: 3.8s;
+    bottom: 180px;
+}
+.slantedBackground span:nth-child(6){
+    width: 45%;
+    animation-duration: 5s;
+    bottom: 180px;
+}
+.slantedBackground span:nth-child(7){
+    width: 82%;
+    animation-duration: 11.2s;
+    bottom: 210px;
+}
+.slantedBackground span:nth-child(8){
+    width: 35%;
+    animation-duration: 6.9s;
+    bottom: 210px;
+}
+.slantedBackground span:nth-child(9){
+    width: 60%;
+    animation-duration: 7.2s;
+    bottom: 240px;
+}
+.slantedBackground span:nth-child(10){
+    width: 40%;
+    animation-duration: 3.7s;
+    bottom: 240px;
+}
+.slantedBackground span:nth-child(11){
+    width: 30%;
+    animation-duration: 11s;
+    bottom: 270px;
+}
+.slantedBackground span:nth-child(12){
+    width: 60%;
+    animation-duration: 12s;
+    bottom: 270px;
+}
+.slantedBackground span:nth-child(13){
+    width: 50%;
+    animation-duration: 9s;
+    bottom: 300px;
+}
+.slantedBackground span:nth-child(14){
+    width: 35%;
+    animation-duration: 7s;
+    bottom: 300px;
+}
+.slantedBackground span:nth-child(15){
+    width: 80%;
+    animation-duration: 5s;
+    bottom: 330px;
+}
+@keyframes slider1 {
+    0% {
+        right: -100%;
+        width: 100%;
+    }
+    100% {
+        right: 100%;
+        width: 0%;
+    }
+}*/

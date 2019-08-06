@@ -1,0 +1,129 @@
+
+.smallradius-btn{
+	--border-radius:5px;
+	--padding-start: 10px;
+  	--padding-end: 10px;
+}
+button{
+	   --padding-top:5px;
+     
+	    --padding-top:5px;
+}
+.filter-select{
+	border:1px solid #ccc;
+	border-radius:5px;
+	padding:7px;
+	min-width:100px;
+    font-size: 15px;
+    cursor:pointer;
+}
+.admin-filter-icons{
+	padding:1px 5px;
+	margin-right:10px;
+}
+.advance-search-plus{
+	position: absolute;
+	font-size: 16px;
+	top:0;
+	right:-3px;
+	color: #fff;
+}
+
+.ion-color-success{
+	--ion-color-contrast: #ffffff !important;
+}
+.ion-color-warning {
+    --ion-color-contrast: #ffffff !important;
+}
+.admin-menu-icons {
+    margin-left: 0px;
+    margin-right: 5px;
+    color:#666;
+  }
+  .adminuser-table th{
+  	background-color: #0d6289;
+  	color: #fff;
+  	font-weight:normal;
+  }
+thead th {
+	cursor: pointer;
+	margin-right: 15px;
+	margin-left: 15px; 
+  
+	span {
+	  visibility: hidden;
+	}
+  
+	&.active {
+	  color: #000;
+  
+	  span {
+		visibility: visible;
+	  }
+	}
+	}
+	
+.cdk-overlay-pane {
+	max-width: 70% !important;
+	max-height: 100%;
+	width: 664px !important;
+}
+
+#cdk-overlay-1 {
+    width: 70% !important;
+}
+.icon-size{
+	font-size: 26px;
+}
+.status-color{
+	padding:5px;
+	font-weight: normal;	
+}
+
+.table-maxheight{
+	max-height:505px;
+	width:100%;
+	overflow-y:scroll;
+}
+.upload-employee-data{
+    text-align: center;
+    border: 1px solid #ccc;
+    padding: 3px 0px;
+    border-radius: 30px;
+    width: 262px;
+    font-size: 16px;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+    color: #fff;
+    background: #033044;
+    text-transform: uppercase;
+    outline: 0;
+    margin-left: 10px;
+    
+    input{
+	 	position: absolute;
+	    left: 0;
+	    top: 0;
+	    right: 0;
+	    bottom: 0;
+	    height: 35px;
+	    z-index: 1000;
+	    width: 100%;
+	    padding-left: 400px;
+	    cursor:pointer;
+	    background:transparent;
+    }
+   
+	  &:hover{
+    	background: #065679;
+    	 .inner-prebtn-icon,
+		  .inner-nextbtn-icon{
+		    background: #033044;
+
+		    ion-icon{
+		      color:#fff;
+		    }
+		  }
+    }
+}

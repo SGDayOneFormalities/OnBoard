@@ -1,0 +1,157 @@
+<ion-header>
+  <ion-toolbar class="header">
+  <ion-buttons slot="start" text-left  class="sg-logo" float-left>
+        <img src="/assets/SG-Logo.png" float-left />
+    </ion-buttons>
+    <ion-buttons slot="end" float-right (click)="homePage()" *ngIf="isHrFlag">
+      <ion-icon name="home" color="dark" padding-horizontal class="admin-home-icon"></ion-icon>
+    </ion-buttons>
+    <ion-buttons slot="end">     
+     <ion-menu-button></ion-menu-button>     
+    </ion-buttons>  
+  </ion-toolbar>
+</ion-header>
+
+<ion-content no-padding>
+  <ion-card-header color="primary" text-uppercase>
+    <div class="container">Education Detail</div>
+  </ion-card-header>
+  <ion-grid class="container" no-padding> 
+    <ion-row>
+      <ion-col>
+      <div class="sg-form">
+        <div class="table-maxheight" padding *ngIf="contacts.length != 0">
+          <table class="adminuser-table max-table" text-left  *ngIf="contacts.length != 0">
+            <thead>
+              <tr >
+                <th>Degree</th>
+                <th>Subject</th>
+                <th>College</th>
+                <th>Result (%) /CGPA</th>
+                <th>From</th>
+                <th>Final-Graduated Year</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let contact of contacts">
+                <td>
+                  <span>{{contact.degree}}</span>
+                </td>
+                <td>
+                  <span >{{contact.subject}}</span>
+                </td>
+                <td>
+                  <span >{{contact.address}}</span>
+                </td>
+                <td>
+                  <span >{{contact.result}}</span>
+                </td>
+                <td>
+                  <span >{{contact.fromYear | date}}</span> 
+                </td>
+                <td>
+                  <span >{{contact.gradYear | date}}</span>
+                </td>
+                <td> 
+                  <div style="width:90px;" *ngIf="!isReadonly"> 
+                    <!-- <button  mat-raised-button matTooltip="Delete Employee Detail" matTooltipPosition="below" (click)="editContact(contact)"  *ngIf="!isEdit" 
+                      ion-button icon-only clear  style="background-color: #fff;" disabled="{{!isReadonly}}">                    
+                      <ion-icon name="create" class="admin-menu-icons" [ngStyle]="{'color': !isReadonly ? '#666' : '#adadad'}" style="margin-left: 0px;"></ion-icon>
+                    </button>
+                    <button  mat-raised-button matTooltip="Delete Employee Detail" matTooltipPosition="below"   *ngIf="!isEdit" 
+                      ion-button icon-only clear  style="background-color: #fff;" disabled="{{!isReadonly}}">                    
+                      <ion-icon name="trash" (click)="confirmation(contact)" class="admin-menu-icons" [ngStyle]="{'color': !isReadonly ? '#666' : '#adadad'}" style="margin-left: 0px;"></ion-icon>
+                    </button> -->
+                    <span *ngIf="!isEdit"><ion-icon name="create" style="margin:0;" class="admin-menu-icons"  (click)="editContact(contact)"></ion-icon></span>             
+                    <span *ngIf="!isEdit" ><ion-icon name="trash" class="admin-menu-icons" (click)="confirmation(contact)"></ion-icon> </span>                  
+                </div>
+                </td>
+              </tr> 
+            </tbody> 
+          </table>
+        </div>
+        <div class="test">
+        <ion-item margin-top lines="none"> 
+          <ion-label  position="fixed" text-wrap>Degree / Diploma <span class="mandatory-asterisk">*</span></ion-label>
+          <mat-form-field>
+            <mat-select  #degree [(ngModel)]="empDegree" disabled="{{isReadonly}}">
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="let degree of degrees" [value]="degree.value">
+                {{degree.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </ion-item>    
+        <ion-item lines="none" *ngIf="degree.value == 'Other'"> 
+          <ion-label  position="fixed"  text-wrap>Other Degree / Diploma<span class="mandatory-asterisk">*</span></ion-label>
+          <ion-input [(ngModel)]="degreeValue" maxlength="100"  disabled="{{isReadonly}}" clearInput></ion-input>
+        </ion-item>     
+        <ion-item lines="none">
+          <ion-label  position="fixed" text-wrap>Subject <span class="mandatory-asterisk">*</span></ion-label>
+          <ion-input  [(ngModel)]="subject" maxlength="100" disabled="{{isReadonly}}" clearInput></ion-input>
+        </ion-item>
+        <ion-item lines="none"> 
+          <ion-label  position="fixed"  text-wrap>College / University (With Address) <span class="mandatory-asterisk">*</span></ion-label>
+          <ion-input [(ngModel)]="collAddress" maxlength="120" disabled="{{isReadonly}}" clearInput></ion-input>
+        </ion-item>      
+        <ion-item lines="none"> 
+          <ion-label  position="fixed" text-wrap>Result (% / CGPA) <span class="mandatory-asterisk">*</span></ion-label>
+          <ion-input [(ngModel)]="result" OnlyNumber="true" maxlength="5" disabled="{{isReadonly}}" clearInput></ion-input>
+        </ion-item>
+        <ion-item lines="none"> 
+          <ion-label  position="fixed"  text-wrap>From <span class="mandatory-asterisk">*</span></ion-label>
+          <mat-form-field>
+            <input matInput [matDatepicker]="fromYearDate" name="fromYear" id="fromYear" [(ngModel)]="fromYear" (blur)="focus1=false" (focus)="fromYearDate.open() && (focus1=true)" [max]='maxDate' disabled="{{isReadonly}}">
+            <!-- <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="fromYear=''" class="transparent-btn"  *ngIf="focus1===true">X</button>               -->
+            <mat-datepicker-toggle matSuffix [for]="fromYearDate" disabled="{{isReadonly}}"></mat-datepicker-toggle>
+            <mat-datepicker #fromYearDate disabled="{{isReadonly}}"></mat-datepicker>
+          </mat-form-field>
+        </ion-item>      
+        <ion-item lines="none">
+          <ion-label  position="fixed" text-wrap>Final-Graduated <span class="mandatory-asterisk">*</span></ion-label>
+          <mat-form-field>
+            <input matInput [matDatepicker]="gradYearDate" name="gradYear" id="gradYear" [(ngModel)]="gradYear" (blur)="focus=false" (focus)="(focus=true) && gradYearDate.open()" [min]='fromYear' [max]='maxDate' disabled="{{isReadonly}}"> 
+            <!-- <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="gradYear=''" class="transparent-btn"  *ngIf="focus===true">X</button>               -->
+            <mat-datepicker-toggle matSuffix [for]="gradYearDate" disabled="{{isReadonly}}"></mat-datepicker-toggle>
+            <mat-datepicker #gradYearDate disabled="{{isReadonly}}"></mat-datepicker>
+          </mat-form-field>
+        </ion-item> 
+      </div>
+        <ion-row margin-top>
+          <ion-col>
+            <ion-button ion-button  shape="round" color="secondary" float-left (click)="backContact()">
+            <span class="inner-prebtn-icon"><ion-icon name="arrow-back"></ion-icon> </span> 
+              Back
+          </ion-button>
+            <ion-button ion-button  shape="round" color="secondary" float-left (click)="editPage()"  *ngIf="isReadonly"> 
+            <span class="inner-prebtn-icon"><ion-icon name="ios-create"></ion-icon> </span> 
+            Edit
+          </ion-button>
+            <ion-button ion-button shape="round" color="secondary" *ngIf="!isEdit" float-left (click)="cleardataConfirmation(contact)">
+              <span class="inner-prebtn-icon"><ion-icon name="ios-trash"></ion-icon> </span> 
+            Clear
+          </ion-button>  
+          </ion-col>
+          <ion-col>                   
+            <ion-button ion-button shape="round" color="secondary" float-right (click)="nextExperience()">Next
+            <span class="inner-nextbtn-icon"><ion-icon name="arrow-forward"></ion-icon> </span>
+            </ion-button>
+            <ion-button ion-button shape="round" color="secondary" *ngIf="!isEdit" float-right (click)="addContact(empDegree ,subject, collAddress, result, fromYear, gradYear)">
+              Save
+            <span class="inner-nextbtn-icon"><ion-icon name="add"></ion-icon> </span>
+            </ion-button>            
+            <span *ngFor="let contact of contacts"><ion-button ion-button shape="round" color="secondary" float-right (click)="cancelEdit(contact)"  *ngIf="contact.isEdit">Cancel
+             <span class="inner-nextbtn-icon"><ion-icon name="ios-close"></ion-icon> </span>
+            </ion-button></span>
+            <span *ngFor="let contact of contacts"><ion-button ion-button shape="round" color="secondary" float-right  *ngIf="contact.isEdit" (click)="saveContact(contact, degree.value,subject, collAddress, result, fromYear, gradYear)">
+            Save
+            <span class="inner-nextbtn-icon"><ion-icon name="ios-save"></ion-icon> </span>
+          </ion-button></span>
+          </ion-col>
+        </ion-row>
+      </div>
+      </ion-col>
+    </ion-row >
+  </ion-grid>
+</ion-content>

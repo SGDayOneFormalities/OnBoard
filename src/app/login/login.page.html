@@ -1,0 +1,54 @@
+<ion-content class="login-content" no-padding>
+    <form padding class="login-form">
+       <ion-row>
+        <ion-col text-center no-padding >
+            <img src="assets/sg-logo-cloud.png" class="logo"/>        
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col text-center no-padding >
+            <div class="login-title fs-30" text-uppercase >
+              <span class="arrow arrow-topleft"></span>
+              <span class="arrow arrow-bottomleft"></span>              
+                <span class="proximanova-bold"> Employee</span>
+                <span class="proximanova-light"> Onboarding</span>
+              <span class="arrow arrow-topright"></span>
+              <span class="arrow arrow-bottomright"></span>
+            </div>       
+        </ion-col>
+      </ion-row>
+    <ion-row>
+       <ion-col no-padding>
+        <ion-list  no-margin no-padding class="login-inner-content">            
+            <ion-item lines="none">
+             <ion-input type="text" placeholder="Mobile Number/User Name" required name="username" id="username" [(ngModel)]="username" ></ion-input>
+             <ion-label class="label" no-margin> <ion-icon name="person"></ion-icon></ion-label>
+           </ion-item>  
+
+           <ion-item lines="none">
+            <ion-input type="password" placeholder="OTP/Password" required name="password" id="password" [(ngModel)]="password"></ion-input>
+            <ion-label  class="label" no-margin> <ion-icon name="unlock"></ion-icon></ion-label>
+          </ion-item>
+        </ion-list>
+        <!-- <ion-list class="rememberme" no-margin  no-padding>
+           <ion-toggle color="primary" name="remember" float-left [(ngModel)]="rememberMe"></ion-toggle>             
+           <ion-label float-left padding-left margin-left>Remember Me</ion-label>
+        </ion-list> -->
+       </ion-col>
+      </ion-row>
+
+    <ion-row>
+      <ion-col>
+         <ion-button class="login-btn" expand="full" shape="round" color="primary" text-uppercase ion-button (click)="login(username, password)">Login</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+    <ion-col no-padding margin-top text-center>©2019  Scientific Games.</ion-col>
+    </ion-row>
+
+    </form>
+
+</ion-content>
+<div class="my-container">
+    <ngx-loading [show]="loading"></ngx-loading>
+</div>

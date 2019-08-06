@@ -1,0 +1,172 @@
+<ion-header>
+  <ion-toolbar  class="header">
+     <ion-buttons slot="start" text-left  class="sg-logo" float-left>
+        <img src="/assets/SG-Logo.png" float-left />
+    </ion-buttons>
+    <ion-buttons slot="end" float-right (click)="homePage()" *ngIf="isHrFlag">
+      <ion-icon name="home" color="dark" padding-horizontal class="admin-home-icon"></ion-icon>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-menu-button></ion-menu-button>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content no-padding>  
+  <ion-card-header color="primary" text-uppercase>
+    <div class="container">Experience Detail</div>
+  </ion-card-header>
+  <ion-grid class="container" no-padding>
+    <ion-row >
+      <ion-col>
+        <div class="sg-form">
+          <ion-item lines="none">
+            <p class="alert-info">Stating from the current / most recent employer first</p>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label  position="fixed"  text-wrap>Total Years of Experience in all company</ion-label>
+            <ion-input [(ngModel)]="totalExp" maxlength="10"  OnlyNumber="true" disabled="{{isReadonly}}" clearInput></ion-input>
+          </ion-item>
+          <div  class="table-maxheight" padding-horizontal *ngIf="contacts.length != 0">
+            <table class="adminuser-table  max-table" margin-top text-left>
+              <thead>
+                <tr>
+                  <th>No.</th>
+                  <th>Years of Experience</th>
+                  <th>Company</th>
+                  <th>From</th>
+                  <th>To</th>          
+                  <th>Location</th>
+                  <th>Designation</th>
+                  <th>Edit/Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let contact of contacts; let exCount = index">
+                  <td>{{exCount+1}}</td> 
+                  <td>{{contact.yearofExp}}</td>  
+                  <td>{{contact.companyName}}</td>
+                  <td>{{contact.joining  | date}}</td>
+                  <td>{{contact.leaving  | date}}</td>
+                  <td>{{contact.worklocation}}</td>
+                  <td>{{contact.desig}}</td>
+                  <td>
+                    <div style="width:90px;" *ngIf="!isReadonly">
+                      <!-- <button  mat-raised-button matTooltip="Delete Employee Detail" matTooltipPosition="below"   *ngIf="!isEdit" 
+                      ion-button icon-only clear  (click)="editExperience(contact)" style="background-color: #fff;" disabled="{{isReadonly}}">                    
+                        <ion-icon name="create" class="admin-menu-icons" [ngStyle]="{'color': !isReadonly ? '#666' : '#adadad'}" style="margin-left: 0px;"></ion-icon>
+                      </button>
+                      <button  mat-raised-button matTooltip="Delete Employee Detail" matTooltipPosition="below"   *ngIf="!isEdit" 
+                        ion-button icon-only clear  (click)="remConfirmation(contact)" style="background-color: #fff;" disabled="{{isReadonly}}">                    
+                        <ion-icon name="trash" class="admin-menu-icons" [ngStyle]="{'color': !isReadonly ? '#666' : '#adadad'}" style="margin-left: 0px;"></ion-icon>
+                      </button> -->
+                      <span *ngIf="!isEdit" ><ion-icon class="admin-menu-icons" style="margin:0;" name="create"  (click)="editExperience(contact)"></ion-icon></span>
+                      <ion-icon class="admin-menu-icons" name="trash" (click)="remConfirmation(contact)"></ion-icon>
+                    </div>
+                  </td>            
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <ion-item lines="none" ><h6 class="proximanova-bold inner-title">Company Details</h6></ion-item>   	
+          <ion-item lines="none"> 
+            <ion-label  position="fixed"  text-wrap>Company Name</ion-label>
+            <ion-input #degree maxlength="100" [(ngModel)]="company" disabled="{{isReadonly}}" clearInput></ion-input>        
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label  position="fixed" text-wrap>From </ion-label>
+            <mat-form-field>
+              <input matInput disabled="{{isReadonly}}" [matDatepicker]="compFromDate" (focus)="compFromDate.open()"  (blur)="focus=false" (focus)="focus=true" name="compFrom" id="compFrom" [(ngModel)]="compFrom" [max]='maxDate' (ngModelChange)="calculateDateDiff($event)">
+              <!-- <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="compFrom=''" class="transparent-btn"  *ngIf="focus===true">X</button>  -->
+              <mat-datepicker-toggle matSuffix [for]="compFromDate" disabled="{{isReadonly}}"></mat-datepicker-toggle>
+              <mat-datepicker #compFromDate disabled="{{isReadonly}}"></mat-datepicker>
+            </mat-form-field>
+          </ion-item>
+          <ion-item lines="none"> 
+            <ion-label  position="fixed"  text-wrap>To</ion-label>
+            <mat-form-field>
+              <input matInput disabled="{{isReadonly}}" [matDatepicker]="compToDate" (focus)="compToDate.open()" (blur)="focus1=false" (focus)="focus1=true" name="compTo" id="compTo" [(ngModel)]="compTo" [min]='compFrom' [max]='maxDate' (ngModelChange)="calculateDateDiff($event)">
+              <!-- <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="compTo=''" class="transparent-btn" *ngIf="focus1===true">X</button>  -->
+              <mat-datepicker-toggle matSuffix [for]="compToDate" disabled="{{isReadonly}}"></mat-datepicker-toggle>
+              <mat-datepicker #compToDate disabled="{{isReadonly}}"></mat-datepicker>
+            </mat-form-field>
+          </ion-item>        
+          <ion-item lines="none">         
+            <ion-label  position="fixed"  text-wrap>Years of Experience in the below company</ion-label>
+            <ion-input [(ngModel)]="experience" maxlength="2" OnlyNumber="true" disabled="{{isReadonly}}" clearInput></ion-input>
+          </ion-item>    
+          <ion-item lines="none">
+            <ion-label  position="fixed" text-wrap>Location </ion-label>
+            <ion-input [(ngModel)]="location" maxlength="100" disabled="{{isReadonly}}" clearInput></ion-input>
+          </ion-item>
+          <ion-item lines="none"> 
+            <ion-label  position="fixed"  text-wrap>Designation</ion-label>
+            <ion-input [(ngModel)]="designation" maxlength="30" disabled="{{isReadonly}}" clearInput></ion-input>
+          </ion-item>      
+          <ion-item lines="none">
+            <ion-label  position="fixed" text-wrap>Department</ion-label>
+            <ion-input [(ngModel)]="department" maxlength="30" disabled="{{isReadonly}}" clearInput></ion-input>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label  position="fixed" text-wrap>Reason for leaving</ion-label>
+            <ion-input [(ngModel)]="reason" maxlength="160" letterOnly="true" disabled="{{isReadonly}}" clearInput></ion-input>
+          </ion-item>
+          <ion-item lines="none"> <h6 class="proximanova-bold inner-title">Reporting Manager’s Details</h6></ion-item>
+          <ion-item lines="none">
+              <ion-label  position="fixed" text-wrap>Name</ion-label>
+              <ion-input [(ngModel)]="managerName" maxlength="60" letterOnly="true" disabled="{{isReadonly}}" clearInput></ion-input>
+          </ion-item>  
+          <ion-item lines="none">
+              <ion-label  position="fixed" text-wrap>Designation</ion-label>
+              <ion-input [(ngModel)]="managerDesignation" maxlength="40" disabled="{{isReadonly}}" clearInput></ion-input>
+          </ion-item> 
+          <ion-item lines="none">          
+              <ion-label  position="fixed" text-wrap>Phone Number<span class="phone-code"> (With Code)</span> </ion-label>
+              <ion-input [(ngModel)]="managerContact" maxlength="14" OnlyNumber="true" disabled="{{isReadonly}}" clearInput></ion-input>
+          </ion-item>    
+          <ion-item lines="none">        
+              <ion-label  position="fixed" text-wrap>Email ID</ion-label>
+              <ion-input [(ngModel)]="managerEmail" maxlength="100" disabled="{{isReadonly}}" clearInput></ion-input>          
+          </ion-item>
+          <ion-row margin-top>
+            <ion-col>
+              <ion-button ion-button shape="round" color="secondary" float-left (click)="backEducation()">
+              <span class="inner-prebtn-icon"><ion-icon name="arrow-back"></ion-icon> </span> 
+               Back
+              </ion-button>
+              <ion-button ion-button  shape="round" color="secondary" float-left (click)="editPage()"  *ngIf="isReadonly"> 
+              <span class="inner-prebtn-icon"><ion-icon name="ios-create"></ion-icon> </span> 
+               Edit
+             </ion-button>
+              <ion-button ion-button shape="round" color="secondary" *ngIf="!isEdit" float-left (click)="cleardataConfirmation()">
+              <span class="inner-prebtn-icon"><ion-icon name="ios-trash"></ion-icon> </span> 
+               Clear
+              </ion-button>   
+            </ion-col>
+            <ion-col>          
+              <ion-button ion-button shape="round" color="secondary" float-right (click)="nextUpload()">
+              Next
+              <span class="inner-nextbtn-icon"><ion-icon name="arrow-forward"></ion-icon></span>
+              </ion-button>
+              <span *ngFor="let contact of contacts"><ion-button ion-button shape="round" color="secondary" float-right  *ngIf="contact.isEdit" (click)="saveExperience(contact)">  Save
+                <span class="inner-nextbtn-icon"><ion-icon name="ios-save"></ion-icon> </span>
+              </ion-button></span>
+              <span *ngFor="let contact of contacts"><ion-button ion-button shape="round" color="secondary" float-right (click)="cancelEdit(contact)"  *ngIf="contact.isEdit">
+                Cancel
+                <span class="inner-nextbtn-icon"><ion-icon name="ios-close"></ion-icon> </span>
+                
+              </ion-button></span>
+              <ion-button ion-button shape="round" color="secondary" float-right  *ngIf="!isEdit" 
+              (click)="addExperience(experience, company, compFrom, compTo, location, designation, department, reason, managerName,managerDesignation, managerContact, managerEmail)">
+              Save
+              <span class="inner-nextbtn-icon"><ion-icon name="add"></ion-icon> </span>
+              </ion-button>                 
+            </ion-col>
+          </ion-row>    
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

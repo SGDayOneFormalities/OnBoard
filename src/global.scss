@@ -1,0 +1,613 @@
+// http://ionicframework.com/docs/theming/
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import '~@ionic/angular/css/core.css';
+@import '~@ionic/angular/css/normalize.css';
+@import '~@ionic/angular/css/structure.css';
+@import '~@ionic/angular/css/typography.css';
+
+@import '~@ionic/angular/css/padding.css';
+@import '~@ionic/angular/css/float-elements.css';
+@import '~@ionic/angular/css/text-alignment.css';
+@import '~@ionic/angular/css/text-transformation.css';
+@import '~@ionic/angular/css/flex-utils.css';
+
+$font-path: "assets/fonts/";
+
+@font-face {
+    font-family: 'proxima-nova-regular';
+    src: url($font-path + 'proximanova-regular-webfont.eot');
+    src: url($font-path + 'proximanova-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url($font-path + 'proximanova-regular-webfont.woff') format('woff'),
+         url($font-path + 'proximanova-regular-webfont.ttf') format('truetype'),
+         url($font-path + 'proximanova-regular-webfont.svg#proxima_nova_rgregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'proxima-nova-light';
+    src: url($font-path + 'proximanova-light-webfont.eot');
+    src: url($font-path + 'proximanova-light-webfont.eot?#iefix') format('embedded-opentype'),
+         url($font-path + 'proximanova-light-webfont.woff') format('woff'),
+         url($font-path + 'proximanova-light-webfont.ttf') format('truetype'),
+         url($font-path + 'proximanova-light-webfont.svg#proxima_nova_rgregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'proxima-nova-bold';
+    src: url($font-path + 'proximanova-bold-webfont.eot');
+    src: url($font-path + 'proximanova-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url($font-path + 'proximanova-bold-webfont.woff') format('woff'),
+         url($font-path + 'proximanova-bold-webfont.ttf') format('truetype'),
+         url($font-path + 'proximanova-bold-webfont.svg#proxima_nova_rgregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/*$font_family_proximanovaregular: 'proxima-nova-regular',sans-serif;
+$font_family_proximanovaregular: 'proxima-nova-bold',sans-serif;
+$font_family_proximanovalight: 'proxima-nova-light',sans-serif;*/
+
+html,html.ios,html.md,ion-app.md, ion-app.ios{
+ --ion-default-font:'proxima-nova-regular',sans-serif;;	
+}
+.proximanova-regular{
+     font-family: 'proxima-nova-regular',sans-serif;
+}
+.proximanova-light{
+	 font-family: 'proxima-nova-light',sans-serif;
+}
+.proximanova-bold{
+	 font-family: 'proxima-nova-bold',sans-serif;
+}
+[text-wrap].sc-ion-label-md-h {
+    min-width: 32%;
+}
+.bottom-border {
+    border-bottom: solid 1px lightgray;
+}
+.sg-logo {
+	ion-img{
+		height:50px;
+    width:115px;
+	}
+  img{
+    height:50px;
+  }
+
+}
+.fs-30{
+	font-size:30px;
+}
+.fs-12{
+    font-size:12px;
+}
+.text-white{
+	color:#fff;
+}
+ion-button{
+    height:36px;
+}
+ion-button.ion-color-secondary,
+.inner-prebtn-icon,
+.inner-nextbtn-icon {
+    transition: all 0.5s;
+    webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    position: relative;   
+    border-radius:50%;
+}
+.inner-prebtn-icon,.inner-nextbtn-icon{
+    width: 30px;
+    height: 30px;
+    background: #fff;
+    color: #033044;
+    border-radius: 50%;
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+    box-shadow: 0 0 3px #ccc;
+
+    ion-icon{ 
+        padding-top: 5px;
+        font-size: 20px;
+    }
+}
+.inner-prebtn-icon{
+    margin-left: -22px;
+    margin-right: 5px;
+}
+.inner-nextbtn-icon{
+    margin-right: -22px;
+    margin-left: 5px;
+}
+
+ion-button.ion-color-secondary:hover {
+  --ion-color-base:#065679!important;
+
+  .inner-prebtn-icon,
+  .inner-nextbtn-icon{
+    background: #033044;
+
+    ion-icon{
+      color:#fff;
+    }
+  }
+
+}
+ion-header{
+  .default-user-icon{
+    border-radius: 50%;
+    margin-left: 10px;
+    margin-top: 5px;
+  }
+  .user-name{
+    margin-top: 14px;
+    font-weight: normal;
+    font-size: 18px;
+  }
+  .user-destination{
+    font-weight: normal;
+    font-size: 14px;
+    color: #717171;
+  }
+  ion-title.title-ios{
+    -webkit-padding-end: 55px;
+    padding-inline-end: 55px;
+  }
+}
+
+.inner-title{
+  background: linear-gradient(90deg, #cecece 0%, #ffffff 100%); 
+  width: 100%; 
+  padding:10px;
+  letter-spacing: 0.2px;
+}
+.sg-form ion-input,.sg-form ion-select{
+	border-bottom:1px solid #ccc;
+}
+/*input left side padding we make zero*/
+.native-input{
+  padding-left:0!important;
+      -webkit-padding-start: 0;
+    padding-inline-start: 0;
+}
+.native-input[disabled]{
+    opacity: .5!important;
+}
+.mat-select-disabled .mat-select-value {
+    color: rgba(0,0,0,.45)!important;
+}
+/*input left side padding we make zero*/
+
+.mat-datepicker-toggle-default-icon {
+  color:#0d6289;
+}
+/*lable disabled style start*/
+.item-interactive-disabled.sc-ion-label-md-h, .item-interactive-disabled .sc-ion-label-md-h {
+    opacity: 1;
+}
+/*lable disabled style end*/
+.mat-form-field-underline {
+    background-color: #ccc!important;
+  }
+  .mat-form-field-ripple {
+    background-color: #ccc!important;
+    height:1px!important;
+  }
+ion-label[position="fixed"] {
+    min-width: 32% !important;
+    max-width: 33% !important;
+}
+[text-wrap].sc-ion-label-ios-h {
+    font-size: inherit;       
+ }
+.phone-code{
+	font-size:80%;
+}
+.table{
+  border-collapse: collapse;
+  width: 100%;
+  td,th {
+	  border: 1px solid #ddd;
+	  padding: 8px;
+	  font-size: 10pt;
+	  font-weight: normal;
+	}
+	tr{
+		&:nth-child(even){background-color: #f2f2f2;}
+		&:hover{background-color: #ddd;}
+	}
+	th {
+	  padding-top: 12px;
+	  padding-bottom: 12px;
+	  background-color: #d2d1d1;
+	}
+}
+
+.adminuser-table{
+    width: 100%;
+    border-collapse:separate; 
+    border-spacing: 0 1em;
+    td,th {
+      padding: 8px;
+      font-size: 10pt;
+    }    
+    th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      background-color: #d2d1d1;
+    }
+    tr {
+      box-shadow: 0 2px 10px #797979, 0 -1px 0px #ececec;
+      -moz-box-shadow: 0 2px 10px #797979, 0 -1px 0px #ececec;
+      -webkit-box-shadow: 0 2px 10px #797979, 0 -1px 0px #ececec;
+      margin-top: 15px;
+  }  
+    
+}
+ion-alert {
+  .alert-head{
+    background:#0D6289!important;  
+    .alert-title {
+      color:#fff!important;
+    }
+  }
+  .alert-message {
+    margin-top:15px!important;
+  }
+  .alert-radio-group{
+    border:none!important;
+  }
+}
+
+
+
+/*IE 11 Browser Support Start*/
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) { 
+    ion-header ion-toolbar:first-child{
+        padding-top:0px!important;
+    }
+    ion-header .button-native{
+      background:#fff!important; 
+      color:#444!important;
+    }
+  ion-card-header{
+    background:#0D6289!important;
+    color:#fff;
+  }
+  .button-native{
+      background:#0D6289!important;      
+  }  
+  body ion-toast .toast-wrapper{
+    background:#0D6289!important;
+    width:700px!important;
+  }
+  body ion-toast .toast-wrapper .button-native{
+     color:#fff!important; 
+  }
+  .adminuser-table tr {
+      /*box-shadow: 0px 1px 0px 0px #ccc;*/
+      box-shadow:inset 0px 1px 0px 0px #ccc, inset 0px -1px 0px 0px #ccc, inset 0px 0px 0px 0px #ccc;
+  }  
+.adminuser-table tr td:first-child{
+     border-left:1px solid #ddd;
+  }
+.adminuser-table tr td:last-child{
+     border-right:1px solid #ddd;
+  }
+  ion-radio-group.gender .item-native{
+    width:150px!important
+  }
+  body ion-content .inner-scroll{
+    background:transparent!important;
+  }  
+  .login-content .item-native{
+    background: transparent !important;
+  }
+  .login-content .item-native .label {
+    max-width:40px!important;
+  }
+  .login-content .item-native ion-label.hydrated {
+    color:#555!important;
+  }
+  .login-btn .button-native{
+     border-radius:5px!important;
+  }
+  ion-badge.ion-color-secondary{
+    background:#033044!important;
+  }
+  ion-badge.ion-color-success{
+    background:#39bb46!important;
+  }
+  ion-badge.ion-color-warning{
+    background:#fe6e00!important;
+  }
+}
+/*IE 11 Browser Support End*/
+
+
+/*IE Edge purpose added  start*/
+@supports (-ms-ime-align:auto) {
+ .adminuser-table tr {
+      /*box-shadow: 0px 1px 0px 0px #ccc;*/
+      box-shadow:inset 0px 1px 0px 0px #ccc, inset 0px -1px 0px 0px #ccc, inset 0px 0px 0px 0px #ccc;
+  }  
+.adminuser-table tr td:first-child{
+     border-left:1px solid #ddd;
+  }
+.adminuser-table tr td:last-child{
+     border-right:1px solid #ddd;
+  }
+  body ion-content .inner-scroll{
+    background:transparent!important;
+  }  
+}
+/*IE Edge purpose added  End*/
+
+
+
+.admin-menu-icons{
+  font-size: 30px;
+  border:1px solid #ccc; 
+  border-radius: 5px;
+  margin-left: 15px;
+  position:relative;
+  color:#666;
+}
+.admin-menu-filtericons{
+    font-size: 24px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    height: 32px;
+    position: relative;
+    padding: 4px;
+    line-height: normal;
+    background: linear-gradient(90deg, #0d6289 0%, #043146 100%);
+    box-shadow: 1px 1px 6px #424040;
+    color: #fff;
+}
+.custom-card{
+	background: #f3f3f3;
+    box-shadow: 0 0px 15px 5px #ccc;
+}
+.alert-info{
+	background: #aee3f1;
+    padding: 10px;
+    width: 100%;
+    box-shadow: 0 4px 5px #ccc;
+    border-radius: 5px;
+}
+.back-btn{
+  font-size: 50px;
+}
+.input-clear-icon,button[aria-label='Clear']{
+    background: url(/assets/error.png) no-repeat!important;
+    width: 20px!important;
+    height: 20px!important;
+    margin-right: 5px!important;
+    text-indent:-9999px;
+}
+
+
+ /* menu page start*/
+ion-menu{
+    .menu-content {
+    --ion-background-color:transparent;
+    background:url('/assets/employee-onboarding-banner.jpg') top right no-repeat fixed;
+    background-size: cover;
+    width:100%;
+    height:100%;
+    position:relative;
+    --color:#fff;
+    
+    &:before{
+            position:absolute;
+            background: rgba(0, 0, 0, 0.9);
+            top:0;bottom:0;right:0;left:0;
+            content:"";
+             filter: blur(5px);
+            -webkit-filter: blur(5px);
+         }
+    }
+    .leftsidemenu-icon{
+      font-size:28px;
+    }
+    .sidemenu-item{
+        border-bottom:1px solid #000;
+        box-shadow: 0 1px 0px #262727;
+        background: transparent!important;
+    }
+    .default-user-icon{
+       border-radius: 50%;
+        border: 3px solid #fffafa;
+    }
+    .user-block{
+       background: rgba(13, 98, 137, 0.53);
+      /* background: linear-gradient(270deg, #0d6bb5, #127cb7, #3F51B5, #36a2d4);*/
+      background-size: 800% 800%;
+
+      -webkit-animation: AnimationName 21s ease infinite;
+      -moz-animation: AnimationName 21s ease infinite;
+      animation: AnimationName 21s ease infinite;
+
+      @-webkit-keyframes AnimationName {
+          0%{background-position:0% 50%}
+          50%{background-position:100% 50%}
+          100%{background-position:0% 50%}
+      }
+      @-moz-keyframes AnimationName {
+          0%{background-position:0% 50%}
+          50%{background-position:100% 50%}
+          100%{background-position:0% 50%}
+      }
+      @keyframes AnimationName { 
+          0%{background-position:0% 50%}
+          50%{background-position:100% 50%}
+          100%{background-position:0% 50%}
+      }
+    }
+
+}
+.admin-home-icon{
+  font-size: 22px;
+  cursor: pointer;
+}
+ /* menu page end*/
+/*file upload start*/
+.my-drop-zone{
+  position:relative;
+}
+.document-upload{
+  position:absolute;
+  width:100%;
+  height:100%;
+  left:0;
+  right:0;
+  bottom:0;
+  top:0;
+  opacity:0;
+}
+/*file upload end*/
+/*material calendar design updated*/
+.mat-calendar-body-today:not(.mat-calendar-body-selected) {
+    border-color: rgba(0, 0, 0, 0.38);
+    background: #0d6289 !important;
+    color: #fff !important;
+    box-shadow: inset 5px 4px 0px #003d58, 0 0 5px 3px #808080;
+}
+.mat-calendar-body-selected {
+    border-color: rgba(0, 0, 0, 0.38);
+    background: #0d6289 !important;
+    color: #fff !important;
+    
+}
+.mat-calendar-table-header {
+    color: #000000;
+}
+.mat-calendar-table-header th{
+  color: #024d6f;
+}
+.mat-datepicker-content{
+  border:1px solid #ccc;
+}
+
+/*material calendar design updated*/
+
+/*material select option hover start */
+.mat-option.mat-active, .mat-option:hover {
+    background: #0d6289!important;
+    color: #fdfbfb!important;
+}
+/*material select option hover end */
+
+/*spinner animation start*/
+.spinner-three-bounce > div{
+  background:#0d6289!important;
+  border:2px solid #fff!important;
+  box-shadow:0 0 5px #000;
+}
+/*spinner animation end*/
+
+.mat-form-field{
+  width:100%;
+  .mat-form-field-wrapper{
+    width:100%;
+  }
+  input{    
+    border:none;
+  }
+}
+
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #ddd; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #0d6289; 
+  border-radius:15px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #077cb2; 
+   border-radius:15px;
+}
+.mandatory-asterisk {
+  font-size: 25px;
+  color: red;
+  vertical-align: sub;
+}
+
+.transparent-btn {
+  background-color: transparent;
+}
+// Clear input 
+
+.cdk-overlay-container .mat-dialog-container {
+    padding: 0!important;
+        overflow: visible;
+}
+.cdk-overlay-container .admin-advance-search{
+  background: #0d6289;
+  color: #fff;
+}
+.cdk-overlay-container .mat-dialog-title {
+    margin: 5px 0 5px 10px;
+}
+.cdk-overlay-container app-advance-search ion-icon[name="close"],
+.cdk-overlay-container app-map ion-icon[name="close"]{
+    background: #f14141;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    padding: 5px;  
+    margin-right: -12px;
+    margin-top: -12px;
+}
+
+@media (min-width:1200px){
+  .container, .header{
+      width:1140px;
+       margin:0 auto;
+  }
+  ion-content{
+    --background:#ccc;
+  }
+  ion-menu .menu-content{
+  --background:transparent;
+   background: url('/assets/employee-onboarding-banner.jpg') top right no-repeat fixed ;
+   background-size: cover;
+   }
+  ion-grid.container{
+     min-height:700px;
+     background:#fff;
+     box-shadow: 0 2px 5px 5px #868686;
+  }
+  /*.cdk-overlay-pane{
+      max-width: 50%!important;
+      width: 50%!important;
+  }*/
+  .cdk-overlay-pane .container{
+    width:100%;
+  }
+  ion-router-outlet ion-content{
+    --background:transparent;
+     background: url('/assets/employee-onboarding-banner-desktop.jpg') top right no-repeat fixed;
+     background-size: cover;
+  }
+}
+
+@media (max-width:1024px){
+  .username-details{
+      display:none;
+  }
+} 

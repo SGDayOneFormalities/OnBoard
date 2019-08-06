@@ -1,0 +1,133 @@
+<ion-header>
+  <ion-toolbar  class="header">
+    <ion-buttons slot="start" text-left  class="sg-logo" float-left>
+        <img src="/assets/SG-Logo.png" float-left />
+    </ion-buttons>
+    <ion-buttons slot="end" float-right (click)="logOut()">
+      <ion-icon name="log-out" color="dark" class="icon-size" padding-horizontal></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<div class="my-container">
+    <ngx-loading [show]="loading"></ngx-loading>
+</div>
+<ion-content no-padding id="print-section">
+  <ion-card-header color="primary" text-uppercase>
+    <div class="container">Employee Status</div>
+  </ion-card-header>
+  <ion-grid class="container" no-padding>
+    <ion-row >
+      <ion-col>
+        <div class="sg-form">
+          <div padding-top>
+            <div title="Advance Search" class="admin-menu-filtericons" color="medium" margin-horizontal  float-right (click)= "advanceSearch(searchTerm)">
+              <ion-icon name="ios-search"></ion-icon>
+              <ion-icon style="position: absolute;font-size: 16px;top:0;right:-3px;color: #fff;" name="ios-add">
+              </ion-icon>
+            </div>
+            <div title="Add Employee" class="admin-menu-filtericons" color="medium" float-right (click)= "addEmp()">
+              <ion-icon name="person-add"></ion-icon>
+            </div>
+              <ion-select placeholder="Status" float-right class="filter-select" margin-horizontal [(ngModel)]="sortStatus" (ionChange)="statusChange(sortStatus)">
+                <ion-select-option value="New">New</ion-select-option>
+                <!-- <ion-select-option value="Pending">Pending</ion-select-option> -->
+                <ion-select-option value="Inprogress">Inprogress</ion-select-option>
+                <ion-select-option value="Completed">Completed</ion-select-option>
+              </ion-select>
+              <ion-select placeholder="Location" float-right class="filter-select" [(ngModel)]="emplocation" (ionChange)="onChangelocation(emplocation)">
+                <ion-select-option value="Chennai">Chennai</ion-select-option>
+                <ion-select-option value="Bangalore">Bangalore</ion-select-option>
+                <ion-select-option value="Pune">Pune</ion-select-option>
+              </ion-select>
+              <ion-label float-right style="margin-top: 8px;margin-right: 8px;">Sort by</ion-label>
+          </div>    
+          <ion-searchbar placeholder="Search Directory" debounce="500" [(ngModel)]="searchTerm" [showCancelButton]="false" 
+          (ionInput)="getItems($event)"  (ionClear)="resetSearch()">      
+          </ion-searchbar>
+          <div  *ngIf="alldata != 0">
+            <div class="table-maxheight">
+              <div class="ion-margin-horizontal ion-margin-bottom" >
+                <table class="adminuser-table" text-left >
+                  <thead>
+                    <tr>
+                      <th class="mdl-data-table__cell--non-numeric">EMPLOYEE NAME</th>
+                      <th>DOJ</th>
+                      <th>LOCATION</th>
+                      <th>VIEW/EDIT/PRINT/DELETE</th>
+                      <th>STATUS</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let data of alldata | orderBy: order : true: false : customComparator">
+                      <td class="mdl-data-table__cell--non-numeric">
+                        <ion-item  lines="none">
+                          <button class="ion-float-left" mat-raised-button matTooltip="Edit for Details by HR" aria-label="Tooltip" matTooltipPosition="below" ion-button icon-only clear (click)="editHrEmpDetail(data)" style="background-color: #fff; margin-top:5px;">
+                          <ion-icon name="ios-create" class="admin-menu-icons"></ion-icon> 
+                        </button>
+                          <ion-avatar *ngIf="data.gender==false">
+                            <img src="assets/default-male-user.jpg"/>
+                          </ion-avatar>
+                          <ion-avatar *ngIf="data.gender==true">
+                            <img src="assets/default-female-user.jpg"/>
+                          </ion-avatar>
+                          <ion-label class="ion-padding-start">{{data.empDataByHR.empFName}} {{data.empDataByHR.empMName}} {{ data.empDataByHR.empLName}}</ion-label>
+                        </ion-item>
+                      </td>  
+                      <td>{{data.empDataByHR.DOJ | date : format : M/d/yyyy}}</td>    
+                      <td>{{data.empDataByHR.workLocation}}</td>           
+                      <td>
+                        
+                        <button mat-raised-button matTooltip="Edit Employee Form" aria-label="Tooltip" matTooltipPosition="below"
+                        ion-button icon-only clear (click)="editEmpDetail(data)" style="background-color: #fff;">
+                          <ion-icon name="create"  class="admin-menu-icons"></ion-icon>
+                        </button>
+                        <button mat-raised-button matTooltip="View Employee Form" aria-label="Tooltip"  matTooltipPosition="below"
+                        ion-button icon-only clear (click)="viewEmpDetail(data)" style="background-color: #fff;" [disabled]="!data.disableIcon">
+                          <ion-icon name="open" class="admin-menu-icons" [ngStyle]="{'color': data.disableIcon ? '#666' : '#adadad'}"></ion-icon>
+                        </button>
+                        <button mat-raised-button matTooltip="Print Employee Form" aria-label="Tooltip" matTooltipPosition="below"
+                        ion-button icon-only clear (click)="printEmpDetail(data)" style="background-color: #fff;" [disabled]="!data.disableIcon">
+                          <ion-icon name="print" class="admin-menu-icons" [ngStyle]="{'color': data.disableIcon ? '#666' : '#adadad'}"></ion-icon>
+                        </button>
+                        <button  mat-raised-button matTooltip="Download Employee Certificates" matTooltipPosition="below"
+                        ion-button icon-only clear (click)="downCetrtificate(data)" style="background-color: #fff;"  [disabled]="!data.disableIcon">
+                          <ion-icon ios="ios-download" md="md-download" md="md-download" class="admin-menu-icons" [ngStyle]="{'color': data.disableIcon ? '#666' : '#adadad'}"></ion-icon>
+                        </button>
+                        <button  mat-raised-button matTooltip="Delete Employee Detail" matTooltipPosition="below"
+                        ion-button icon-only clear (click)="deleteEmpDetail(data)" style="background-color: #fff;" [disabled]="data.disableIcon">                    
+                          <ion-icon name="trash" class="admin-menu-icons" [ngStyle]="{'color': !data.disableIcon ? '#666' : '#adadad'}"></ion-icon>
+                        </button>
+                      </td> 
+                      <td class="mdl-data-table__cell--non-numeric">
+                        <ion-badge  class="status-color" color="{{data.color}}"> {{data.status}}</ion-badge> 
+                        <div *ngIf='data.status=="Completed"' style="margin-left: -32px;">{{data.hrReviewStatus}}</div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>     
+        </div>
+      </ion-col>
+    </ion-row> 
+    <ion-card> 
+      <ion-card-content *ngIf="alldata == 0" >    
+        <ion-label>No data found</ion-label>
+      </ion-card-content>
+    </ion-card> 
+     <div class="upload-employee-data ion-padding-end" float-left>                 
+        <span class="inner-prebtn-icon"><ion-icon name="ios-cloud-upload"></ion-icon></span>
+        Upload Employee Data
+      <input type="file" (change)="loadExcelFile($event)" multiple="false" />
+    </div> 
+    <div  float-left (click)="downloadExcelSample()" class="ion-padding-start" style="color:#033044;padding-top:10px;">
+        Download Sample Excel Sheet
+    </div>  
+    <!--<ion-buttons slot="start" text-left  class="sg-logo" float-left click="downloadExcelSample()">
+        
+    </ion-buttons>-->
+      
+  </ion-grid>
+</ion-content>
+

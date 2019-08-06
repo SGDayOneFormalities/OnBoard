@@ -1,0 +1,67 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      List
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content no-padding>
+    <ion-card-header color="primary" text-uppercase>
+      <div class="container">Add Employee</div>
+    </ion-card-header>
+    <ion-grid class="container" no-padding>
+      <ion-row >
+        <ion-col>
+          <div class="sg-form">
+            <ion-item lines="none">
+              <ion-label position="fixed" text-wrap>Employee Full Name</ion-label>
+              <ion-input  #firstname minlength="1" maxlength="25"  name="fName" id="fName" [(ngModel)]="fName" letterOnly="true" requied placeholder="Firstname"></ion-input>
+              <ion-input  minlength="0" maxlength="25"  name="mName" id="mName"  [(ngModel)]="mName" letterOnly="true" placeholder="Middlename"></ion-input>
+              <ion-input  minlength="1" maxlength="25" name="lName" id="lName"  [(ngModel)]="lName" letterOnly="true" requied placeholder="Lastname"></ion-input>
+            </ion-item>            
+            <ion-item lines="none">
+              <ion-label position="fixed" text-wrap>Date of Joining</ion-label>          
+              <mat-form-field>
+                <input  matInput [matDatepicker]="pickerDOB" [(ngModel)]='DOB'>
+                <mat-datepicker-toggle matSuffix [for]="pickerDOB"></mat-datepicker-toggle>
+                <mat-datepicker #pickerDOB ></mat-datepicker>
+              </mat-form-field>
+            </ion-item>             
+            <ion-item lines="none">
+              <ion-label  text-wrap  position="fixed">Designation</ion-label>
+              <ion-input name="stdNameFormat" id="stdNameFormat" [(ngModel)]="designation" placeholder="Designation"></ion-input>
+            </ion-item>   
+            <ion-item lines="none">
+              <ion-label text-wrap  position="fixed">Buddy Name</ion-label>
+              <ion-input name="stdNameFormat" id="stdNameFormat" [(ngModel)]="buddyName" placeholder="Buddy Name"></ion-input>
+            </ion-item>  
+            <ion-item lines="none">
+              <ion-label position="fixed" text-wrap>Location</ion-label>
+              <mat-form-field>
+                <select matNativeControl [(ngModel)]="workLocation" required>
+                  <option value="chennai">Chennai</option>
+                  <option value="bangalore">Bangalore</option>
+                  <option value="pune">Pune</option>
+                </select>
+              </mat-form-field>
+            </ion-item>
+            <ion-row margin-top>
+              <ion-col>
+                <ion-button ion-button  shape="round" color="secondary" float-left (click)="backWelcome()"> Back
+                </ion-button>
+                <ion-button ion-button  shape="round" color="secondary" float-left (click)="editPage()" *ngIf="isReadonly"> Edit
+                </ion-button>  
+              </ion-col>
+              <ion-col>                   
+                <ion-button ion-button shape="round" color="secondary" float-right (click)="nextContact(fName, mName, lName, stdNameFormat, nameChanged, nameChangeDate, DOB, sex, maritalStatus, fFName, fMName, fLName)">Next</ion-button>
+              </ion-col>
+            </ion-row>   
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content> -->

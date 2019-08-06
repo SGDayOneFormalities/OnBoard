@@ -1,0 +1,73 @@
+<ion-content class="login-content" no-padding>
+	<form padding class="login-form">
+		 <ion-row>
+	        <ion-col text-center no-padding >
+	            <img src="assets/sg-logo-cloud.png" class="logo logoanimation"/>        
+	        </ion-col>
+	      </ion-row>
+	      <ion-row>
+	       <ion-col no-padding >
+	        <ion-list text-center no-margin no-padding><h2 no-margin text-uppercase class="proximanova-light">Welcome <b>{{ empFName + " " + empLName }}</b> TO</h2></ion-list>
+	        <ion-list text-center no-margin no-padding><h2 text-uppercase margin-bottom  class="proximanova-bold tracking-in-expand-fwd-top">Scientific games</h2></ion-list>
+	        <ion-list text-center no-margin no-padding  class="welcome-content roboto">
+	           We are excited that you are joining us here at <strong> Scientific games</strong>. We can't wait for you to start. We have included some helpful information and ask that you complete this new employee packet so you can hit the ground running on your first day. If you have any questions, please don't hesitate to ask.
+	        </ion-list>
+	       </ion-col>
+	      </ion-row>
+	       <ion-row class="expand-row" margin-top>
+	        <ion-col no-padding size="5" class="secondary-bg employee-location-details" padding>
+                <ion-list text-uppercase  no-margin no-padding  class="roboto">YOUR FIRST DAY</ion-list>
+               <!-- format : M/d/yyyy -->
+                 	<p class="welcome-icon">
+                 		<ion-icon name="calendar" padding-right class="icon"></ion-icon>
+                 		<span class="proximanova-light"> {{DOJ | date}}</span>
+                 	</p>
+                 	<p class="welcome-icon">
+                 		<ion-icon name="md-alarm" padding-right class="icon"></ion-icon> 
+                 		<span class="proximanova-light">  08:00 AM</span>
+                 	</p>
+                	<p class="welcome-icon">
+                		<ion-icon name="pin" padding-right class="icon"></ion-icon> 
+                		<span class="proximanova-light"> {{workLocation}}</span>
+                	</p>
+                	<p class="welcome-icon" (click)= "mapLocaton()">
+                		<ion-icon name="compass" padding-right class="icon" style="cursor:pointer"></ion-icon> 
+                		<span class="proximanova-light" style="cursor:pointer">  Map </span>
+                	</p>     
+             	
+	        </ion-col>
+	        <ion-col no-padding  size="7" class="primary-bg" padding>
+	        	<ion-list class="roboto" text-uppercase  no-margin  no-padding lines="none"  padding-left padding-bottom>WHOM TO CONTACT</ion-list>
+	            <ion-item  lines="none"  no-margin no-padding style="z-index: 10;">				  
+				     <img class="default-user-icon" src="assets/default-user.jpg" width="100"/>  
+				  
+				  <ion-col>
+				  	<ion-list no-margin no-padding class="text-white proximanova-light">{{POCName}}</ion-list>
+				  	<ion-list no-margin padding-top padding-bottom  class="text-white proximanova-light">
+				  	{{pocDesignation}}</ion-list>
+				  	<ion-list no-margin  no-padding class="text-white proximanova-light">{{hrNumber}}</ion-list>
+				  </ion-col>
+				</ion-item>
+	        </ion-col>
+	      </ion-row>
+	       <ion-row margin-top>
+	       	<ion-col  size="2"></ion-col>
+	       	<ion-col  size="8">
+		      <ion-button ion-button shape="round"  expand="full" color="secondary" text-uppercase (click)="nextHomePage()" style="z-index:10;">Start KYC</ion-button>
+		    </ion-col>
+		    <ion-col  size="2"></ion-col>
+	       </ion-row>
+	       <ion-row>
+		    	<ion-col margin-top text-center class="copyright-line-height">
+		    		©2019  Scientific Games.
+		   		 </ion-col>
+		    </ion-row>
+		<img src="assets/rocket-launch.png" class="welcome-rocket"/> 
+	</form>
+	<!-- animation icons start-->
+	<div id="cloud1"><img src="assets/coin.svg" width="50"/></div>
+	<div id="cloud2"><img src="assets/cards.svg" width="50"/></div>
+	<div id="cloud3"><img src="assets/slot-machine.svg" width="50"/></div>
+	<div id="cloud4"><img src="assets/roulette.svg" width="50"/></div>     
+	<!-- animation icons end-->
+</ion-content>

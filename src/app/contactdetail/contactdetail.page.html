@@ -1,0 +1,360 @@
+<ion-header>
+  <ion-toolbar  class="header">
+    <ion-buttons slot="start" text-left  class="sg-logo">
+        <img src="/assets/SG-Logo.png" float-left />
+    </ion-buttons>
+    <ion-buttons slot="end" float-right (click)="homePage()" *ngIf="isHrFlag">
+        <ion-icon name="home" color="dark" padding-horizontal class="admin-home-icon"></ion-icon>
+      </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button>
+    <ion-menu-button></ion-menu-button>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content no-padding>
+  <ion-card-header color="primary" text-uppercase>
+    <div class="container">CONTACT DETAILS</div>
+  </ion-card-header>
+  <ion-grid class="container" no-padding>
+    <ion-row >
+      <ion-col>
+        <div class="sg-form">
+          <ion-item lines="none"> <h6 class="proximanova-bold inner-title">Permanent Address </h6></ion-item>
+          <ion-item lines="none">
+              <ion-label  position="fixed"  text-wrap>Address <span class="mandatory-asterisk">*</span></ion-label>              
+             <!-- <ion-input [(ngModel)]="perAddressFlatNo" maxlength="100" disabled="{{isReadonly}}" clearInput placeholder="House no. / Flat no. - Flat Name" class="ion-margin-end"></ion-input>              
+              <ion-input [(ngModel)]="perAddressStreet" maxlength="120" disabled="{{isReadonly}}" clearInput  placeholder="Street" ></ion-input>-->
+              <mat-form-field class="ion-margin-end">
+                <input matInput required [(ngModel)]="perAddressFlatNo" maxlength="100" disabled="{{isReadonly}}" clearInput placeholder="House no. / Flat no. - Flat Name" class="ion-margin-end">
+              </mat-form-field>
+              <mat-form-field class="ion-margin-end">
+                <input matInput required [(ngModel)]="perAddressStreet" maxlength="120" disabled="{{isReadonly}}" clearInput  placeholder="Street">
+              </mat-form-field>  
+          </ion-item>          
+          <ion-item lines="none">
+              <ion-label position="fixed"  text-wrap></ion-label>            
+              <!--<ion-input [(ngModel)]="perAddressArea" maxlength="120"  disabled="{{isReadonly}}" clearInput  placeholder="Area" class="ion-margin-end"></ion-input>
+              <ion-input [(ngModel)]="perAddressDistrict" maxlength="100" disabled="{{isReadonly}}" clearInput  placeholder="District"></ion-input>  -->
+              <mat-form-field class="ion-margin-end">
+                <input matInput required  [(ngModel)]="perAddressArea" maxlength="120"  disabled="{{isReadonly}}" clearInput  placeholder="Area" class="ion-margin-end">
+              </mat-form-field>
+              <mat-form-field class="ion-margin-end">
+                <input matInput required [(ngModel)]="perAddressDistrict" maxlength="100" disabled="{{isReadonly}}" clearInput  placeholder="District">
+              </mat-form-field>
+          </ion-item>
+          <ion-item lines="none">
+              <ion-label position="fixed"  text-wrap></ion-label>
+              <!--<ion-input [(ngModel)]="perAddressState" maxlength="100" disabled="{{isReadonly}}" clearInput placeholder="State" class="ion-margin-end"></ion-input>              
+              <ion-input [(ngModel)]="perAddressPin" maxlength="6" disabled="{{isReadonly}}" clearInput placeholder="PIN" OnlyNumber="true"></ion-input>-->
+              <!-- <mat-form-field class="ion-margin-end">
+                <input matInput required [(ngModel)]="perAddressState" maxlength="100" disabled="{{isReadonly}}" clearInput placeholder="State" class="ion-margin-end">
+              </mat-form-field> -->
+              <mat-form-field class="ion-margin-end">
+                <mat-select  matInput #statesFormate [(ngModel)]="perAddressState" disabled="{{isReadonly}}" placeholder="State" clearInput  class="ion-margin-end" required>
+                  <mat-option>None</mat-option>
+                  <mat-option *ngFor="let state of states" [value]="state.key">
+                    {{state.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="ion-margin-end">
+                <input matInput required [(ngModel)]="perAddressPin" maxlength="6" disabled="{{isReadonly}}" clearInput placeholder="PIN" OnlyNumber="true">
+              </mat-form-field>
+          </ion-item>
+          <ion-item lines="none">      
+            <ion-label  position="fixed"  text-wrap>Phone Number <span class="phone-code">(With Code)</span> / Mobile Number <span class="mandatory-asterisk">*</span>
+            </ion-label>
+            <ion-input [(ngModel)]="perPhone" maxlength="12" OnlyNumber="true" disabled="{{isReadonly}}" clearInput></ion-input>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label  position="fixed" text-wrap>Alternative Phone Number <span class="phone-code">(With Code)
+            </span> </ion-label>
+            <ion-input [(ngModel)]="perAltPhone" maxlength="12" OnlyNumber="true" disabled="{{isReadonly}}" clearInput></ion-input>
+          </ion-item>
+          <ion-item lines="none"> 
+            <ion-label  position="fixed"  text-wrap>Residing since <span class="mandatory-asterisk">*</span></ion-label>
+            <mat-form-field>
+              <input matInput [matDatepicker]="dpResidingDate" [(ngModel)]="residingDate" [max]='maxDate' disabled="{{isReadonly}}" (focus)="dpResidingDate.open()" (blur)="focus=false" (focus)="focus=true" clearInput>
+              <!-- <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="residingDate=''" class="transparent-btn" *ngIf="focus===true">X</button> -->
+              <mat-datepicker-toggle matSuffix [for]="dpResidingDate" disabled="{{isReadonly}}"></mat-datepicker-toggle>
+              <mat-datepicker #dpResidingDate startView="multi-year" disabled="{{isReadonly}}">  
+              </mat-datepicker>
+            </mat-form-field>
+          </ion-item>       
+          <ion-item lines="none">
+            <ion-label  position="fixed" text-wrap>Personal Email ID <span class="mandatory-asterisk">*</span></ion-label>
+            <ion-input [(ngModel)]="empEmail" maxlength="100" [email]="true" disabled="{{isReadonly}}" email required clearInput></ion-input>
+          </ion-item>
+          <ion-item lines="none"> <h6  class="proximanova-bold inner-title">Current Address</h6></ion-item>
+          <ion-row>
+            <ion-col size=4>
+              <ion-item lines="none">
+                <ion-label position="fixed" text-wrap style=" min-width: 100%!important;max-width:100%!important;">Same as Permanent Address</ion-label>
+              </ion-item>
+            </ion-col>
+            <ion-col text-left>
+              <ion-item lines="none">      
+                <ion-checkbox slot="start" float-left  [(ngModel)]="sameAddress" disabled="{{isReadonly}}" (ionChange)="onSameAddress(sameAddress,perAddressFlatNo,perAddressStreet,perAddressArea,perAddressDistrict, perAddressState, perAddressPin, residingDate, perPhone)"></ion-checkbox>
+              </ion-item>
+            </ion-col>
+          </ion-row>     
+          <!-- <ion-item lines="none">
+            <ion-label  position="fixed" class="color-black"  text-wrap>Address </ion-label>
+            <ion-input [(ngModel)]="currAddress" disabled="{{isReadonly}}" clearInput></ion-input>
+          </ion-item> -->
+          <ion-item lines="none">
+              <ion-label  position="fixed"  text-wrap>Address</ion-label>              
+              <!--<ion-input [(ngModel)]="currAddressFlatNo" maxlength="100" disabled="{{isReadonly}}" clearInput  placeholder="House no. / Flat no." class="ion-margin-end"></ion-input>              
+              <ion-input [(ngModel)]="currAddressStreet" maxlength="120" disabled="{{isReadonly}}" clearInput  placeholder="Street"></ion-input>-->
+              <mat-form-field class="ion-margin-end">
+                <input matInput [(ngModel)]="currAddressFlatNo" maxlength="100" disabled="{{isReadonly}}" clearInput  placeholder="House no. / Flat no." class="ion-margin-end">
+              </mat-form-field>
+              <mat-form-field class="ion-margin-end">
+                <input matInput [(ngModel)]="currAddressStreet" maxlength="120" disabled="{{isReadonly}}" clearInput  placeholder="Street">
+              </mat-form-field>  
+          </ion-item>          
+          <ion-item lines="none">
+              <ion-label position="fixed"  text-wrap></ion-label>            
+              <!--<ion-input [(ngModel)]="currAddressArea" maxlength="120" disabled="{{isReadonly}}" clearInput  placeholder="Area" class="ion-margin-end"></ion-input>
+              <ion-input [(ngModel)]="currAddressDistrict" maxlength="100" disabled="{{isReadonly}}" clearInput  placeholder="District"></ion-input>  -->
+              <mat-form-field class="ion-margin-end">
+                <input matInput [(ngModel)]="currAddressArea" maxlength="120" disabled="{{isReadonly}}" clearInput  placeholder="Area" class="ion-margin-end">
+              </mat-form-field>
+              <mat-form-field class="ion-margin-end">
+                <input matInput [(ngModel)]="currAddressDistrict" maxlength="100" disabled="{{isReadonly}}" clearInput  placeholder="District">
+              </mat-form-field>
+          </ion-item>
+          <ion-item lines="none">
+              <ion-label position="fixed"  text-wrap></ion-label>
+              <!-- <ion-input [(ngModel)]="currAddressState" maxlength="100" disabled="{{isReadonly}}" clearInput placeholder="State" class="ion-margin-end"></ion-input>              
+              <ion-input [(ngModel)]="currAddressPin" maxlength="6" disabled="{{isReadonly}}" clearInput placeholder="PIN" OnlyNumber="true"></ion-input> -->
+              <!-- <mat-form-field class="ion-margin-end">
+                <input matInput [(ngModel)]="currAddressState" maxlength="100" disabled="{{isReadonly}}" clearInput placeholder="State" class="ion-margin-end">
+              </mat-form-field> -->
+              <mat-form-field class="ion-margin-end">
+                <mat-select  matInput #statesFormate [(ngModel)]="currAddressState" disabled="{{isReadonly}}" placeholder="State" clearInput  class="ion-margin-end">
+                  <mat-option>None</mat-option>
+                  <mat-option *ngFor="let state of states" [value]="state.key">
+                    {{state.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="ion-margin-end">
+                <input matInput [(ngModel)]="currAddressPin" maxlength="6" disabled="{{isReadonly}}" clearInput placeholder="PIN" OnlyNumber="true">
+              </mat-form-field>
+          </ion-item>
+          <ion-item lines="none"> 
+            <ion-label  position="fixed"  text-wrap>Residing since </ion-label>
+            <mat-form-field>
+              <input matInput [matDatepicker]="dpCurrResideingDate" [(ngModel)]="currResideingDate" [max]='maxDate' disabled="{{isReadonly}}" (focus)="dpCurrResideingDate.open()" (blur)="focus1=false" (focus)="focus1=true">
+              <!-- <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="currResideingDate=''" class="transparent-btn" *ngIf="focus1===true">X</button> -->
+              <mat-datepicker-toggle matSuffix [for]="dpCurrResideingDate" disabled="{{isReadonly}}"></mat-datepicker-toggle>
+              <mat-datepicker #dpCurrResideingDate startView="multi-year" disabled="{{isReadonly}}">
+              </mat-datepicker>
+            </mat-form-field>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label  position="fixed" text-wrap>
+              Phone Number <span class="phone-code">(With Code)</span></ion-label>
+            <ion-input [(ngModel)]="currPhone" maxlength="12" OnlyNumber="true" disabled="{{isReadonly}}" clearInput></ion-input>
+          </ion-item>   
+          <ion-item lines="none">
+            <ion-label  position="fixed" text-wrap>Specify whether to send official correspondence (if any) to:</ion-label>
+            <mat-form-field>
+              <mat-select matNativeControl [(ngModel)]="selectedCorrespondence" disabled="{{isReadonly}}" >
+                <mat-option>None</mat-option>
+                <mat-option value="permanentAdd">Permanent Address</mat-option>
+                <mat-option value="currentAdd">Current address</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </ion-item>
+          <ion-item lines="none"> <h6 class="proximanova-bold inner-title">Emergency Contact Information</h6></ion-item>
+          <ion-item lines="none"> 
+            <ion-label  position="fixed" text-wrap>Contact Name  <span class="mandatory-asterisk">*</span></ion-label>
+            <ion-input letterOnly="true" maxlength="100" [(ngModel)]="emergencyName" required letterOnly="true" disabled="{{isReadonly}}" clearInput></ion-input>
+          </ion-item>          
+          <ion-item lines="none">
+            <ion-label  position="fixed" text-wrap>
+              Mobile Number  <span class="mandatory-asterisk">*</span></ion-label>
+            <ion-input [(ngModel)]="emergencyMobileNo" OnlyNumber="true" maxlength="12" required disabled="{{isReadonly}}" clearInput></ion-input>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label  position="fixed" text-wrap>
+              Phone Number <span class="phone-code">(With Code)</span></ion-label>
+            <ion-input [(ngModel)]="emergencyPhone" OnlyNumber="true" maxlength="12" disabled="{{isReadonly}}" clearInput></ion-input>
+          </ion-item>
+          <ion-item lines="none"> <h6 class="proximanova-bold inner-title">Dependant Information</h6></ion-item>
+          <ion-item lines="none"> 
+            <ion-label  position="fixed" text-wrap>1. Dependant  </ion-label>
+            <!--<ion-input letterOnly="true" maxlength="100" [(ngModel)]="dependentName1" required letterOnly="true" disabled="{{isReadonly}}" clearInput placeholder="Name" class="ion-margin-end"></ion-input>-->
+              <mat-form-field class="ion-margin-end">
+                 <input matInput letterOnly="true" maxlength="100" [(ngModel)]="dependentName1" letterOnly="true" disabled="{{isReadonly}}" clearInput placeholder="Name" class="ion-margin-end">
+              </mat-form-field>
+            <mat-form-field class="ion-margin-end dependant-relationship">
+              <mat-select  matInput #depRelation1 [(ngModel)]="dependentRelationship1" disabled="{{isReadonly}}" placeholder="Relationship" clearInput>
+                  <mat-option>None</mat-option>
+                  <mat-option *ngFor="let dependRelation of dependentRelationship" [value]="dependRelation.value">
+                    {{dependRelation.viewValue}}
+                  </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="ion-margin-end dependant-gender">
+              <mat-select [(ngModel)]="dependentGender1" disabled="{{isReadonly}}" placeholder="Gender">                
+                <mat-option>None</mat-option>
+                <mat-option value="male">Male</mat-option>
+                <mat-option value="female">Female</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="dependant-dob">
+              <input matInput placeholder="DOB" [matDatepicker]="dependent1DobDate" [(ngModel)]="dependent1Date" [max]='maxDate' disabled="{{isReadonly}}" (focus)="dependent1DobDate.open()" (blur)="focus2=false" (focus)="focus2=true">
+              <!-- <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="dependent1Date=''" class="transparent-btn" *ngIf="focus2===true">X</button> -->
+              <mat-datepicker-toggle matSuffix [for]="dependent1DobDate" disabled="{{isReadonly}}"></mat-datepicker-toggle>
+              <mat-datepicker #dependent1DobDate startView="multi-year" disabled="{{isReadonly}}">
+              </mat-datepicker>
+            </mat-form-field>
+          </ion-item>          
+          
+          <ion-item lines="none"> 
+            <ion-label  position="fixed" text-wrap>2. Dependant </ion-label>
+            <!-- <ion-input letterOnly="true" maxlength="100" [(ngModel)]="dependentName2" required letterOnly="true" disabled="{{isReadonly}}" clearInput placeholder="Name"  class="ion-margin-end"></ion-input> -->
+            <mat-form-field class="ion-margin-end">
+                <input matInput letterOnly="true" maxlength="100" [(ngModel)]="dependentName2" letterOnly="true" disabled="{{isReadonly}}" clearInput placeholder="Name"  class="ion-margin-end">
+            </mat-form-field>
+            <mat-form-field class="ion-margin-end dependant-relationship">
+              <mat-select  #depRelation2 [(ngModel)]="dependentRelationship2" disabled="{{isReadonly}}" placeholder="Relationship">
+                  <mat-option>None</mat-option>
+                  <mat-option *ngFor="let dependRelation of dependentRelationship" [value]="dependRelation.value">
+                    {{dependRelation.viewValue}}
+                  </mat-option>
+                </mat-select>
+            </mat-form-field>
+           <mat-form-field class="ion-margin-end dependant-gender">
+              <mat-select [(ngModel)]="dependentGender2" disabled="{{isReadonly}}" placeholder="Gender">                
+                <mat-option>None</mat-option>
+                <mat-option value="male">Male</mat-option>
+                <mat-option value="female">Female</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="dependant-dob">
+              <input matInput placeholder="DOB" [matDatepicker]="dependent2DobDate" [(ngModel)]="dependent2Date" [max]='maxDate' disabled="{{isReadonly}}" (focus)="dependent2DobDate.open()" (blur)="focus3=false" (focus)="focus3=true">
+              <!-- <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="dependent2Date=''" class="transparent-btn" *ngIf="focus2===true">X</button> -->
+              <mat-datepicker-toggle matSuffix [for]="dependent2DobDate" disabled="{{isReadonly}}"></mat-datepicker-toggle>
+              <mat-datepicker #dependent2DobDate startView="multi-year" disabled="{{isReadonly}}">
+              </mat-datepicker>
+            </mat-form-field>
+          </ion-item>        
+          
+          <ion-item lines="none"> 
+            <ion-label  position="fixed" text-wrap>3. Dependant </ion-label>
+            <!-- <ion-input letterOnly="true" [(ngModel)]="dependentName3" maxlength="100" required letterOnly="true" disabled="{{isReadonly}}" clearInput placeholder="Name" class="ion-margin-end"></ion-input> -->
+            <mat-form-field class="ion-margin-end">
+              <input matInput letterOnly="true" [(ngModel)]="dependentName3" maxlength="100"letterOnly="true" disabled="{{isReadonly}}" clearInput placeholder="Name" class="ion-margin-end">
+            </mat-form-field>
+            <mat-form-field class="ion-margin-end dependant-relationship">
+              <mat-select  #depRelation3 [(ngModel)]="dependentRelationship3" disabled="{{isReadonly}}" placeholder="Relationship">
+                  <mat-option>None</mat-option>
+                  <mat-option *ngFor="let dependRelation of dependentRelationship" [value]="dependRelation.value">
+                    {{dependRelation.viewValue}}
+                  </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="ion-margin-end dependant-gender">
+              <mat-select [(ngModel)]="dependentGender3" disabled="{{isReadonly}}" placeholder="Gender">                
+                <mat-option>None</mat-option>
+                <mat-option value="male">Male</mat-option>
+                <mat-option value="female">Female</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="dependant-dob">
+              <input matInput placeholder="DOB" [matDatepicker]="dependent3DobDate" [(ngModel)]="dependent3Date" [max]='maxDate' disabled="{{isReadonly}}" (focus)="dependent3DobDate.open()" (blur)="focus4=false" (focus)="focus4=true">
+              <!-- <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="dependent3Date=''" class="transparent-btn" *ngIf="focus4===true">X</button> -->
+              <mat-datepicker-toggle matSuffix [for]="dependent3DobDate" disabled="{{isReadonly}}"></mat-datepicker-toggle>
+              <mat-datepicker #dependent3DobDate startView="multi-year" disabled="{{isReadonly}}">
+              </mat-datepicker>
+            </mat-form-field>
+          </ion-item>         
+          
+          <ion-item lines="none"> 
+            <ion-label  position="fixed" text-wrap>4. Dependant </ion-label>
+            <!-- <ion-input letterOnly="true" [(ngModel)]="dependentName4" maxlength="100" required letterOnly="true" disabled="{{isReadonly}}" clearInput placeholder="Name" class="ion-margin-end"></ion-input> -->
+            <mat-form-field class="ion-margin-end">
+              <input matInput letterOnly="true" [(ngModel)]="dependentName4" maxlength="100" letterOnly="true" disabled="{{isReadonly}}" clearInput placeholder="Name" class="ion-margin-end">
+            </mat-form-field>
+            <mat-form-field class="ion-margin-end dependant-relationship">
+              <mat-select  #depRelation4 [(ngModel)]="dependentRelationship4" disabled="{{isReadonly}}" placeholder="Relationship">
+                  <mat-option>None</mat-option>
+                  <mat-option *ngFor="let dependRelation of dependentRelationship" [value]="dependRelation.value">
+                    {{dependRelation.viewValue}}
+                  </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="ion-margin-end dependant-gender">
+              <mat-select [(ngModel)]="dependentGender4" disabled="{{isReadonly}}" placeholder="Gender">                
+                <mat-option>None</mat-option>
+                <mat-option value="male">Male</mat-option>
+                <mat-option value="female">Female</mat-option>
+              </mat-select>
+            </mat-form-field>
+           <mat-form-field class="dependant-dob">
+              <input matInput placeholder="DOB" [matDatepicker]="dependent4DobDate" [(ngModel)]="dependent4Date" [max]='maxDate' disabled="{{isReadonly}}" (focus)="dependent4DobDate.open()" (blur)="focus5=false" (focus)="focus5=true">
+              <!-- <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="dependent4Date=''" class="transparent-btn" *ngIf="focus5===true">X</button> -->
+              <mat-datepicker-toggle matSuffix [for]="dependent4DobDate" disabled="{{isReadonly}}"></mat-datepicker-toggle>
+              <mat-datepicker #dependent4DobDate startView="multi-year" disabled="{{isReadonly}}">
+              </mat-datepicker>
+            </mat-form-field>  
+          </ion-item> 
+          <ion-item lines="none"> 
+            <ion-label  position="fixed" text-wrap>5. Dependant </ion-label>
+           <!--  <ion-input letterOnly="true" [(ngModel)]="dependentName5" maxlength="100" required letterOnly="true" disabled="{{isReadonly}}" clearInput placeholder="Name" class="ion-margin-end"></ion-input> -->
+            <mat-form-field class="ion-margin-end">
+              <input matInput  letterOnly="true" [(ngModel)]="dependentName5" maxlength="100" letterOnly="true" disabled="{{isReadonly}}" clearInput placeholder="Name" class="ion-margin-end">
+            </mat-form-field>
+            <mat-form-field class="ion-margin-end dependant-relationship">
+              <mat-select  #depRelation5 [(ngModel)]="dependentRelationship5" disabled="{{isReadonly}}" placeholder="Relationship">
+                  <mat-option>None</mat-option>
+                  <mat-option *ngFor="let dependRelation of dependentRelationship" [value]="dependRelation.value">
+                    {{dependRelation.viewValue}}
+                  </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="ion-margin-end dependant-gender">
+              <mat-select [(ngModel)]="dependentGender5" disabled="{{isReadonly}}" placeholder="Gender">                
+                <mat-option>None</mat-option>
+                <mat-option value="male">Male</mat-option>
+                <mat-option value="female">Female</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="dependant-dob">
+              <input matInput placeholder="DOB" [matDatepicker]="dependent5DobDate" [(ngModel)]="dependent5Date" [max]='maxDate' disabled="{{isReadonly}}" (focus)="dependent5DobDate.open()" (blur)="focus6=false" (focus)="focus6=true">
+              <!-- <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="dependent5Date=''" class="transparent-btn" *ngIf="focus6===true">X</button> -->
+              <mat-datepicker-toggle matSuffix [for]="dependent5DobDate" disabled="{{isReadonly}}"></mat-datepicker-toggle>
+              <mat-datepicker #dependent5DobDate startView="multi-year" disabled="{{isReadonly}}">
+              </mat-datepicker>
+            </mat-form-field>
+          </ion-item> 
+          <ion-row margin-top>
+            <ion-col>
+              <ion-button ion-button shape="round" color="secondary" float-left (click)="backPersonaldetail()">
+              <span class="inner-prebtn-icon"><ion-icon name="arrow-back"></ion-icon> </span> 
+                Back
+              </ion-button>
+              <ion-button ion-button  shape="round" color="secondary" float-left (click)="editPage()" *ngIf="isReadonly"> 
+                <span class="inner-prebtn-icon"><ion-icon name="ios-create"></ion-icon> </span> 
+                Edit
+              </ion-button>
+            </ion-col>
+            <ion-col>                   
+              <ion-button ion-button shape="round" color="secondary"  float-right (click)="nextEducation(perAddressFlatNo, perAddressStreet, perAddressArea, perAddressDistrict, perAddressState, perAddressPin, residingDate, perAltPhone, perPhone, empEmail, currAddress, currResideingDate, currPhone, selectedCorrespondence, emergencyName,emergencyPhone, emergencyMobileNo, dependentName1, dependentName2, dependentName3, dependentName4, dependentName5, dependent1Date,dependent2Date,dependent3Date,dependent4Date,dependent5Date)"> 
+              Next
+            <span class="inner-nextbtn-icon"><ion-icon name="arrow-forward"></ion-icon> </span>
+            </ion-button>
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

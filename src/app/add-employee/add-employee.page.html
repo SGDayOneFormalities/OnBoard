@@ -1,0 +1,93 @@
+<ion-header>
+  <ion-toolbar class="header">
+  <ion-buttons slot="start" text-left  class="sg-logo" float-left>
+        <img src="/assets/SG-Logo.png" float-left />
+    </ion-buttons>   
+  </ion-toolbar>
+</ion-header>
+<div class="my-container">
+    <ngx-loading [show]="loading"></ngx-loading>
+</div>
+<ion-content no-padding>
+    <ion-card-header color="primary" text-uppercase>
+      <div class="container">Add Employee</div>
+    </ion-card-header>
+    <ion-grid class="container" no-padding>
+      <ion-row >
+        <ion-col>
+          <div class="sg-form">
+            <ion-item lines="none">
+              <ion-label position="fixed" text-wrap>Employee Full Name <span class="mandatory-asterisk">*</span></ion-label>
+              <!-- <ion-input  #firstname minlength="1" maxlength="25"  name="empFName" [(ngModel)]="empFName" letterOnly="true" requied placeholder="Firstname" letterOnly="true" clearInput></ion-input>
+              <ion-input  minlength="0" maxlength="25"  name="empMName"  [(ngModel)]="empMName" letterOnly="true" placeholder="Middlename" letterOnly="true" clearInput></ion-input>
+              <ion-input  minlength="1" maxlength="25" name="empLName"  [(ngModel)]="empLName" letterOnly="true" requied placeholder="Lastname" letterOnly="true" clearInput></ion-input> -->
+              <mat-form-field class="ion-margin-end">
+                <input matInput required #firstname minlength="1" maxlength="25"  name="empFName" [(ngModel)]="empFName" letterOnly="true"  placeholder="Firstname" letterOnly="true" clearInput> 
+              </mat-form-field>
+              <mat-form-field class="ion-margin-end">
+                <input matInput minlength="0" maxlength="25"  name="empMName"  [(ngModel)]="empMName" letterOnly="true" placeholder="Middlename" letterOnly="true" clearInput>
+              </mat-form-field>
+              <mat-form-field class="ion-margin-end">
+                <input matInput required minlength="1" maxlength="25" name="empLName"  [(ngModel)]="empLName" letterOnly="true" placeholder="Lastname" letterOnly="true" clearInput>
+              </mat-form-field>
+            </ion-item> 
+                      
+            <ion-item lines="none">
+              <ion-label position="fixed" text-wrap>Date of Joining <span class="mandatory-asterisk">*</span></ion-label>        
+              <mat-form-field>
+                <input  matInput [matDatepicker]="pickerDOJ" [(ngModel)]='DOJ' (focus)="openCalendar(pickerDOJ)">             
+                <!-- <button #btn aria-label="Clear" [style.visibility]="!focusInput ? 'hidden' : 'visible'" matSuffix mat-icon-button (click)="closePicker(pickerDOJ)"></button> -->
+                <mat-datepicker-toggle matSuffix [for]="pickerDOJ"></mat-datepicker-toggle>
+                <mat-datepicker #pickerDOJ="matDatepicker" (closed)="pickerDOJ.close()"></mat-datepicker>
+              </mat-form-field>
+            </ion-item>   
+            <ion-item lines="none">
+              <ion-label text-wrap  position="fixed">Email Id <span class="mandatory-asterisk">*</span></ion-label>
+              <ion-input name="empEmailId"  maxlength="100" [(ngModel)]="empEmailId" placeholder="Email Id" [email]="true" email required clearInput></ion-input>
+            </ion-item>           
+            <ion-item lines="none">
+              <ion-label  text-wrap  position="fixed">Designation</ion-label>
+              <ion-input name="stdNameFormat" maxlength="100" id="stdNameFormat" [(ngModel)]="designation" placeholder="Designation" clearInput></ion-input>
+            </ion-item>                
+            <ion-item lines="none">
+              <ion-label text-wrap  position="fixed">Department</ion-label>
+              <ion-input name="buddyName" maxlength="100" [(ngModel)]="department" placeholder="Department" clearInput></ion-input>
+            </ion-item>  
+            <ion-item lines="none">
+              <ion-label text-wrap  position="fixed">Buddy Name</ion-label>
+              <ion-input name="buddyName" maxlength="80" [(ngModel)]="buddyName" placeholder="Buddy Name"  letterOnly="true" clearInput></ion-input>
+            </ion-item>             
+            <ion-item lines="none">
+              <ion-label position="fixed" text-wrap>Location <span class="mandatory-asterisk">*</span></ion-label>
+              <mat-form-field>
+                <mat-select matNativeControl [(ngModel)]="workLocation" required>
+                  <mat-option>None</mat-option>
+                  <mat-option value="Chennai">Chennai</mat-option>
+                  <mat-option value="Bangalore">Bangalore</mat-option>
+                  <mat-option value="Pune">Pune</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </ion-item>
+            <ion-row margin-top>
+              <ion-col>
+                <ion-button ion-button  shape="round" color="secondary" float-left (click)="backAdminPage()"> 
+                  <span class="inner-prebtn-icon"><ion-icon name="arrow-back"></ion-icon></span>
+                  Back
+                </ion-button>
+              </ion-col>
+              <ion-col> 
+                <ion-button ion-button shape="round" color="secondary" *ngIf="!addFlag" float-right (click)="editEmployee(empFName, empMName, empLName, DOJ, empEmailId,  designation, department, buddyName, workLocation)">
+                Save
+                <span class="inner-nextbtn-icon"><ion-icon name="ios-save"></ion-icon></span>
+                </ion-button>                  
+                <ion-button ion-button shape="round" color="secondary" *ngIf="addFlag" float-right (click)="addEmployee(empFName, empMName, empLName, DOJ, empEmailId,  designation, department, buddyName, workLocation)">
+                  Add
+                  <span class="inner-nextbtn-icon"><ion-icon name="ios-save"></ion-icon></span>
+                </ion-button>
+              </ion-col>
+            </ion-row>   
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>

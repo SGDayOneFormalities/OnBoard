@@ -1,0 +1,25 @@
+.className{
+    white-space: pre-line;
+ }
+ .dependant-relationship{
+ 	width: 130px;
+ }
+ .dependant-gender{
+ 	width: 90px;	
+ }
+ .dependant-dob{
+ 	width: 110px;
+ }
+
+ /*IE 11 Browser Support Start*/
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) { 
+ .dependant-relationship{
+ 	width: 300px;
+ }
+ .dependant-gender{
+ 	width: 190px;	
+ }
+ .dependant-dob{
+ 	width: 210px;
+ }
+}

@@ -1,0 +1,221 @@
+<style>
+    .my-drop-zone { border: dotted 3px lightgray; }
+    .nv-file-over { border: dotted 3px red; } /* Default class applied to drop zones on over */
+    .another-file-over-class { border: dotted 3px green; }
+ 
+    html, body { height: 100%; }
+</style>
+<ion-header>
+  <ion-toolbar  class="header">
+    <ion-buttons slot="start" text-left  class="sg-logo" float-left>
+          <img src="/assets/SG-Logo.png" float-left />
+    </ion-buttons>
+    <ion-buttons slot="end" float-right (click)="homePage()" *ngIf="isHrFlag">
+      <ion-icon name="home" color="dark" padding-horizontal class="admin-home-icon"></ion-icon>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-menu-button></ion-menu-button>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content no-padding>
+ <ion-card-header color="primary" text-uppercase>
+    <div class="container">Document Detail</div>
+  </ion-card-header>
+  <ion-grid class="container" no-padding>
+    <ion-row>
+      <ion-col>
+      <div class="sg-form">
+        <ul class="list-decimal">
+          <li>Educational certificates and Mark lists
+            <ul class="list-square">
+              <li><ion-text color="primary">UG and PG (mark sheets, Provisional certificates, Convocation certificates)</ion-text></li>
+            </ul>
+
+          </li>
+          <li>Employment certificates previous two employers
+            <ul class="list-square">
+              <li><ion-text color="primary">Offer /Appointment Letters</ion-text></li>
+              <li><ion-text color="primary">Relieving Letters and Experience / Service Certificates</ion-text></li>
+            </ul>
+          </li>
+          <li> Id Proofs
+            <ul class="list-square">
+              <li><ion-text color="primary">Pan card</ion-text></li>
+              <li><ion-text color="primary">Aadhar card</ion-text></li>
+            </ul>
+          </li>
+          <li>Previous Provident Fund and F.P.F. (if applicable) numbers</li>
+          <li>NON Solicitation, NON Disclosure Agreement Signed with Previous Employer ( if any )</li>
+          <li>Photo Requirement
+            <ul class="list-square">
+              <li><ion-text color="primary">2 hard copy passport size photos</ion-text></li>
+              <li><ion-text color="primary">1 soft copy photo, which strictly follows below guidelines:</ion-text>
+                    <ul class="list-circle">
+                      <li>Photo must be 2 inches by 2 inches.</li>
+                      <li>Dressed in formals only.</li>
+                      <li>Background color in SG Cobalt Light Blue (Color Code Pantone 301) free of patterns,textures, objects .etc.</li>
+                      <li>Face ratio and background color exactly matching attached sample.</li>
+                      <li>JPEG Image format (sample is attached for your reference)</li>
+                      <li>Scanned photo OR photo taken of hard copy will not be accepted</li>
+                    </ul>
+              </li>
+            </ul>
+          </li>   
+        </ul>
+      
+        <ion-item lines="none"> <h6 class="proximanova-bold inner-title">Upload documents</h6></ion-item>
+        <!-- <ion-row>
+          <ion-col>
+            <div *ngFor="let file of filename">
+              {{file}}
+            </div>
+          </ion-col>
+        </ion-row> -->
+        <ion-row>           
+          <ion-col padding-end *ngIf="!(filename.length==1)">  
+              <div  *ngIf="!(uploader?.queue?.length == 1)">   
+                <div  text-center margin ng2FileDrop
+                      [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}"
+                      (fileOver)="fileOverAnother($event, uploader)"
+                      [uploader]="uploader"
+                      (onFileDrop)="onFileDrop($event, $event)"
+                      class="well my-drop-zone" padding>
+                    <div><ion-icon style="font-size: 60px; color:#b9b9b9" name="ios-cloud-upload"></ion-icon></div>
+                    <strong>Choose a File</strong>  (or) Drag and Drop
+                    <input class="document-upload" type="file" ng2FileSelect [uploader]="uploader"  />
+                </div>
+                <p margin class="alert-info">NOTE - Only Zip folder is allowed. Maximum file size can be 25 MB. </p>
+              </div>
+          </ion-col>
+          
+          <ion-col size="12" padding-start *ngIf="(uploader?.queue?.length) || (filename.length>0)">              
+              <p>
+                <strong float-left class="ion-padding-end">Upload Documents:</strong>
+                 <ion-badge color="danger" float-left> {{(filename.length >= 1) ? filename.length : uploader?.queue?.length }} </ion-badge>
+              </p>  
+              <table class="adminuser-table"  text-left>
+                  <thead>
+                      <tr>
+                          <th width="50%">Name</th>
+                          <th>Size</th>
+                          <!-- <th>Progress</th> -->
+                          <th>Status</th>
+                          <th>Actions</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr *ngFor="let file of filename">
+                        <td >
+                            {{file}}
+                        </td>
+                        <td></td>
+                        <td>
+                          <div class="progress" style="font-size: 24px;">  
+                            <ion-icon ios="ios-checkmark-circle" md="md-checkmark-circle" class="status-color" color="success"></ion-icon>
+                          </div>
+                        </td>                           
+                        <td>
+                            <button ion-button icon-only clear (click)="removeFile(file)" style="background-color: #fff;">
+                              <ion-icon name="trash" color="medium" class="admin-menu-icons"></ion-icon>
+                            </button>
+                        </td>
+                      </tr>
+                      <tr *ngFor="let item of uploader.queue">
+                          <td><strong>{{ item?.file?.name }}</strong></td>
+                          <td nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
+                          <td>
+                            <!-- [ngStyle]="{ 'width': item.progress + '%' }" -->
+                            <div class="progress" style="font-size: 24px;">   
+                                <div *ngIf="item.isUploaded || fileResponse">
+                                    <!-- <ion-icon ios="ios-done-all" md="md-done-all"></ion-icon> -->
+                                    <ion-icon ios="ios-checkmark-circle" md="md-checkmark-circle" class="status-color" color="success"></ion-icon>
+                                </div>
+                                <div *ngIf="!item.isUploaded || (!fileResponse)">
+                                  <ion-icon ios="ios-close-circle" md="md-close-circle" class="status-color" color="danger"></ion-icon>
+                                </div>
+                            </div>
+                          </td>
+                          <!-- <td class="text-center">color="danger"
+                              <span ><i class="glyphicon glyphicon-ok"></i></span>
+                              <span><i class="glyphicon glyphicon-ban-circle"></i></span>
+                              <span><i class="glyphicon glyphicon-remove"></i></span>
+                          </td> -->
+                          <td>
+                          <!-- <td nowrap> -->
+                              <!-- <button type="button" class="btn btn-success btn-xs"
+                                      (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
+                                  <span class="glyphicon glyphicon-upload"></span> Upload
+                              </button>
+                              <button type="button" class="btn btn-warning btn-xs"
+                                      (click)="item.cancel()" [disabled]="!item.isUploading">
+                                  <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                              </button>
+                              <button type="button" class="btn btn-danger btn-xs"
+                                      (click)="item.remove()">
+                                  <span class="glyphicon glyphicon-trash"></span> Remove
+                              </button> -->
+                              <button ion-button icon-only clear (click)="removeFileitem(item)" style="background-color: #fff;">
+                                <ion-icon name="trash" class="admin-menu-icons"></ion-icon>
+                              </button>
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>
+    
+              <div *ngIf="uploader?.queue?.length">
+                  <!-- <div>
+                      Queue progress: {{uploader.progress}}
+                      <div class="progress" > 
+                          <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }">{{uploader.progress}}</div>
+                          <div ></div>
+                          
+                      </div>
+                  </div> -->
+                  
+                  <!-- <input  [(ngModel)]="uploader.progress" (onChange) = 'progressChange(uploader.progress)'></input> -->
+          <!-- <ion-item lines="none" style="display:none">
+              <ion-input  name="stdNameFormat" id="stdNameFormat" value ='{{uploader.progress}}'  (ionChange)='nextConfirmation(uploader.progress)'></ion-input>
+          </ion-item> -->
+                  <!-- <button type="button" class="btn btn-success btn-s"
+                          (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+                      <span class="glyphicon glyphicon-upload"></span> Upload all
+                  </button>
+                  <button type="button" class="btn btn-warning btn-s"
+                          (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading">
+                      <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
+                  </button>
+                  <button type="button" class="btn btn-danger btn-s"
+                          (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
+                      <span class="glyphicon glyphicon-trash"></span> Remove all
+                  </button> -->
+              </div>
+              <!--TODO: timer code to remove -->
+              <!-- <button (click)='startTimer()'>Start Timer</button>
+              <button (click)='pauseTimer()'>Pause</button>
+              <p>{{timeLeft}} Seconds Left....</p>  -->
+              <!--  -->
+          </ion-col>    
+        </ion-row>        
+        <ion-row margin-top>
+          <ion-col>
+            <ion-button ion-button  shape="round" color="secondary" float-left routerLink="/experiencedetail">
+              <span class="inner-prebtn-icon"><ion-icon name="arrow-back"></ion-icon> </span> 
+              Back
+            </ion-button>
+            <ion-button ion-button  shape="round" color="secondary" float-left (click)="editPage()" *ngIf="isReadonly"> 
+              <span class="inner-prebtn-icon"><ion-icon name="ios-create"></ion-icon> </span>  Edit</ion-button>
+          </ion-col>
+          <ion-col>                          
+            <ion-button ion-button shape="round" color="secondary" float-right (click)="nextConfirmation()">Next <span class="inner-nextbtn-icon"><ion-icon name="arrow-forward"></ion-icon> </span></ion-button>
+            <!-- <ion-button ion-button shape="round" color="secondary" float-right (click)="upload(uploader.progress)">upload</ion-button>        -->
+          </ion-col>
+        </ion-row>
+      </div>
+      </ion-col>
+    </ion-row>  
+  </ion-grid>
+</ion-content>

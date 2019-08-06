@@ -1,0 +1,146 @@
+.welcome-card ion-img {
+  max-height: 35vh;
+  overflow: hidden;
+}
+.mat-form-field{
+	width:100%;
+	.mat-form-field-wrapper{
+		width:100%;
+	}
+	input{
+		
+		border:none;
+	}
+}
+.my-drop-zone { 
+	border: dotted 2px lightgray; 
+	ion-icon{
+			transition: all .2s ease-in-out;
+	}
+}
+.my-drop-zone{
+	&:hover { 
+			border: dotted 2px #a7aaab; 
+			ion-icon{
+					animation: pound .5s infinite;
+			}
+	}
+}
+.another-file-over-class{
+	ion-icon{
+			animation: pound .5s infinite;
+	}
+}
+@keyframes pound {
+	from { transform: none; }
+	50% { transform: scale(1.4); color:#063a52}
+	to { transform: none; }
+}
+nv-file-over { 
+	border: dotted 2px red; 
+} 
+/* Default class applied to drop zones on over */
+.another-file-over-class { 
+	border: dotted 2px green; 
+}
+
+.list-decimal{
+	list-style-type: decimal;
+}
+.list-square{
+	list-style-type: square;
+}
+.list-circle{
+	list-style-type: circle;
+}
+ul {
+	margin-top:10px;
+li{
+	margin-bottom:10px;
+}
+}
+ion-slide {
+	height: 140px;
+	width:109px!important;
+	flex-direction: column;
+}
+
+ion-img {
+	max-width: 100%;
+	max-height: 100%;
+}
+.view-user-details{
+	position:relative;	
+	cursor:pointer;
+	width:70px;
+}
+.view-user-details .view{
+	position:absolute;
+	background:rgba(0,0,0,0.7);
+	left:0;
+	top:0;
+	right:0;
+	bottom:0;
+	text-align: center;
+    line-height:85px;
+    color:#fff;
+    border-radius: 5px;
+}
+.view-user-close{
+    position: absolute;
+    right: -12px;
+    color: #ff0000;
+    z-index: 100;
+    top: -10px;
+    font-size: 18px;
+}
+.view-user-thumb{
+	/*height:80px;
+	width:100px; */
+	border-radius: 5px; 
+	border: 1px solid #ccc; 
+	box-shadow:0px 0 5px #6b6b6b;
+}
+.upload-employee-data{
+	text-align: center;
+    border: 1px solid #ccc;
+    padding: 3px 0px;
+    border-radius: 5px;
+    width: 160px;
+    font-size: 13px;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+    color: #fff;
+    background: #033044;
+    text-transform: uppercase;
+    outline: 0;
+	margin: -27px 0 0 8px;
+    
+    input{
+	 	position: absolute;
+	    left: 0;
+	    top: 0;
+	    right: 0;
+	    bottom: 0;
+	    height: 35px;
+	    z-index: 1000;
+	    width: 100%;
+	    padding-left: 400px;
+	    cursor:pointer;
+	    background:transparent;
+    }
+   
+	  &:hover{
+    	background: #065679;
+    	 .inner-prebtn-icon,
+		  .inner-nextbtn-icon{
+		    background: #033044;
+
+		    ion-icon{
+		      color:#fff;
+		    }
+		  }
+    }
+}
+

@@ -1,0 +1,54 @@
+<div class="container admin-advance-search">
+  <h1 mat-dialog-title float-left cdkFocusInitial>Advance Search</h1>
+  <div  mat-dialog-actions style="display: inherit !important; padding: 0px !important"><ion-icon name="close" slot="end" float-right (click)="onNoClick()"></ion-icon></div>
+</div> 
+<div mat-dialog-content   style="overflow: inherit !important;">     
+  <ion-item lines="none" class="ion-padding-top">
+    <mat-form-field>    
+      <input matInput placeholder="Date of Joining" [matDatepicker]="pickerSearchDOJ" [(ngModel)]='searchDOJ'  (focus)="pickerSearchDOJ.open()">
+      <mat-datepicker-toggle matSuffix [for]="pickerSearchDOJ"></mat-datepicker-toggle>
+      <mat-datepicker #pickerSearchDOJ ></mat-datepicker>
+    </mat-form-field> 
+  </ion-item>
+  <ion-item lines="none">
+    <mat-form-field>
+      <mat-select placeholder="Location" matNativeControl [(ngModel)]="searchLocation" required>
+        <mat-option value="all" selected>All location</mat-option>
+        <mat-option value="Chennai" selected>Chennai</mat-option>
+        <mat-option value="Bangalore">Bangalore</mat-option>
+        <mat-option value="Pune">Pune</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </ion-item> 
+  <ion-item lines="none">
+    <mat-form-field>
+      <input placeholder="From" matInput [matDatepicker]="pickerDOJFrom" [(ngModel)]='DOJFrom'  (focus)="pickerDOJFrom.open()">
+      <mat-datepicker-toggle matSuffix [for]="pickerDOJFrom"></mat-datepicker-toggle>
+      <mat-datepicker #pickerDOJFrom ></mat-datepicker>
+    </mat-form-field>
+  </ion-item>
+  <ion-item lines="none">
+    <mat-form-field>
+      <input placeholder="To" matInput [matDatepicker]="pickerDOJTo" [(ngModel)]='DOJTo' (focus)="pickerDOJTo.open()"  [min]='pickerDOJFrom' >
+      <mat-datepicker-toggle matSuffix [for]="pickerDOJTo"></mat-datepicker-toggle>
+      <mat-datepicker #pickerDOJTo ></mat-datepicker>
+    </mat-form-field>
+  </ion-item>
+  <ion-item lines="none" no-padding no-margin style="height:15px;" *ngIf="bothDateFlag">
+    <ion-label position="fixed" text-wrap no-padding no-margin> </ion-label>
+    <div style="font-size: 12px; margin-top:-35px;margin-left: 12px;color: #ff0000;">
+        <strong>NOTE:</strong>  Please fill To Date and From Date Both.              
+    </div>
+  </ion-item> 
+</div>
+
+<ion-row>
+  <ion-col>
+    <ion-button ion-button size="small" color="secondary" float-right (click)="onNoClick()">Cancel</ion-button>     
+  </ion-col>
+  <ion-col>                   
+    <button style="background-color: transparent; margin-left: 25px;" float-left (click)="search()">
+      <ion-button ion-button size="small" color="secondary">Search</ion-button>
+    </button>
+  </ion-col>
+</ion-row> 

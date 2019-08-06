@@ -1,0 +1,76 @@
+<div class="container admin-advance-search" style="height: 40px;">
+  <h1 mat-dialog-title float-left>Map</h1>
+  <div  mat-dialog-actions style="display: inherit !important; padding: 0px !important"><ion-icon name="close" slot="end" float-right (click)="onNoClick()"></ion-icon></div>
+</div> 
+<div mat-dialog-content   style="overflow: inherit !important;">     
+  
+<ion-content padding style='height: 300px; background: #fff;'>
+  <ion-grid>
+  <ion-row  *ngIf="this.data.location== 'Chennai'" style="background: #fff;padding: 5px;">   
+      <ion-col>
+         <a class="map-view" href="https://goo.gl/maps/dxh3GjUvuwTzNjr88" target="_blank">
+            <img src="/assets/location-image/chennai.png" alt="Trulli" style="width:100%" class="chennai-location">
+         </a>
+      </ion-col>
+      <ion-col>
+        <p><strong>Address:</strong></p>
+        <figcaption>
+        <div>Unit 1&4,  </div>
+        <div>11th Floor, Crest Building, </div>
+        <div>International Tech Park, </div>
+        <div>Taramani - CSIR road, </div>
+        <div>Chennai,</div>
+        <div>Tamil Nadu 600113</div>
+        </figcaption>
+      </ion-col>   
+  </ion-row>
+  <ion-row  *ngIf="this.data.location== 'Bangalore'"  style="background: #fff;padding: 5px;">
+    <ion-col>
+      <a class="map-view" href="https://goo.gl/maps/oD8CfzhjScJpWLaC7" target="_blank">
+      <img src="/assets/location-image/bangalore.png" alt="Trulli" style="width:100%" class="chennai-location"></a> 
+    </ion-col>
+     <ion-col> 
+        <p><strong>Address:</strong></p>
+        <figcaption>
+          <div>Level 8, Navigator Building, </div>
+          <div>ITPB, </div>
+          <div>Pattandur Agrahara, </div>
+          <div>Whitefield, </div>
+          <div>Bengaluru, </div>
+          <div>Karnataka 560066</div>
+      </figcaption>
+     </ion-col>
+  </ion-row>
+  <ion-row  *ngIf="this.data.location== 'Pune'"  style="background: #fff;padding: 5px;">
+    <ion-col> 
+      <a class="map-view" href="https://goo.gl/maps/YiLRXskK3AWzu8Zk6" target="_blank"> 
+      <img src="/assets/location-image/pune.png" alt="Trulli" style="width:100%" class="chennai-location">
+       </a>
+       </ion-col>
+       <ion-col> 
+          <p><strong>Address:</strong></p>
+          <figcaption> 
+            <div>401 bldg, Level 1, </div>
+            <div>Jail Rd,  </div>
+            <div>Commerzone IT Park,  </div>
+            <div>Yerawada,  </div>
+            <div>Pune,  </div>
+            <div>Maharashtra 411006 </div>
+          </figcaption>
+      </ion-col>
+   
+  </ion-row>
+</ion-grid>
+</ion-content>
+</div>
+
+<ion-row>
+  <!-- <ion-col>
+    <ion-button ion-button size="small" color="secondary" float-right (click)="onNoClick()">Cancel</ion-button>     
+  </ion-col>
+  <ion-col>                   
+    <button style="background-color: transparent; margin-left: 25px;" [mat-dialog-close]="data.searchResult" float-left (click)="ok()">
+      <ion-button ion-button size="small" color="secondary">OK</ion-button>
+    </button>
+  </ion-col> -->
+</ion-row> 
